@@ -1,27 +1,28 @@
+#' Wrapper function to overlay page numbers and other numvers.
 #' 
-#' 
-#' 
+#' @rdname pdf_overla
+#' @param input,stamp  A string of file name or path of pdf file.
+#'                     input is a base pdf and stamp will be overlayed.
+#' @param start,end    An integer of start and end page to be stamped.
+#'                     negative integer can be used for end, which means
+#'                     number from the last page.
 #' @examples
+#' input <- file.path(find.package("automater"), "pdf/00_sn_a.pdf")
+#' pdf_overlay_page_num(input, start = 11, end = -3)
 #' 
-#' library(qpdf)
-#' setwd("D:/matu/work/ToDo/2310vs_congress/program")
-#' input <- "input.pdf"
-#' stamp <- "stamp.pdf"
-#' 
-#' pdf_overlay_stamps_each(input, stamp)
-#' 
-#' 
-#' input <- "d:/00_sn_a.pdf"
-#' pdf_overlay_page_num(input)
-#' 
-#' 
-#' 
+#' @return  A string of output pdf file.
 #' @export
 pdf_overlay_page_num <- function(input, start = 1, end = NULL){
   stamp <- file.path(find.package("automater"), "pdf/00_page.pdf")
   pdf_overlay_stamps_each(input, stamp, start, end)
 }
 
+#' 
+#' 
+#' @rdname 
+#' @examples
+#' pdf_overlay_stamps_each(input, stamp)
+#' 
 #' @export
 pdf_overlay_stamps_each <- function(input, stamp, start = 1, end = NULL){
   len_input <- qpdf::pdf_length(input)
