@@ -13,8 +13,9 @@
 #' 
 #' 
 #' 
-#'  find.package("automater")
+#' 
 page_num <- function(input, start = 1, end = NULL){
+  pkg <- file.path(find.package("automater"), "inst/pdf/")
   
 }
 
