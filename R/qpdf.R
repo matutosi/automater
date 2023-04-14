@@ -11,14 +11,18 @@
 #' pdf_overlay_stamps_each(input, stamp)
 #' 
 #' 
+#' input <- "d:/00_sn_a.pdf"
+#' pdf_overlay_page_num(input)
 #' 
 #' 
 #' 
-page_num <- function(input, start = 1, end = NULL){
-  pkg <- file.path(find.package("automater"), "inst/pdf/")
-  
+#' @export
+pdf_overlay_page_num <- function(input, start = 1, end = NULL){
+  stamp <- file.path(find.package("automater"), "pdf/00_page.pdf")
+  pdf_overlay_stamps_each(input, stamp, start, end)
 }
 
+#' @export
 pdf_overlay_stamps_each <- function(input, stamp, start = 1, end = NULL){
   len_input <- qpdf::pdf_length(input)
   len_stamp <- qpdf::pdf_length(stamp)
@@ -50,4 +54,3 @@ validate_length <- function(len_input, len_stamp, start, end){
   if(len_input < end  )    { stop("input pages must be larger than end!") }
   if(len_input > len_stamp){ stop("stamp pages must be equal to or bigger than input!") }
 }
-
