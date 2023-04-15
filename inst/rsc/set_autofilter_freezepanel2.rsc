@@ -4,7 +4,7 @@ if(! pkg %in% installed.packages()[,1]){
   install.packages(pkg, repo = "https://cran.ism.ac.jp/")
 }
 
-pkg <- "matutosi/automater"
+pkg <- "automater"
 if(! pkg %in% installed.packages()[,1]){
   devtools::install_github("matutosi/automater")
 }
