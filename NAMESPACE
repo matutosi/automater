@@ -2,5 +2,10 @@
 
 export("%>%")
 export(pdf_overlay_page_num)
+export(pdf_overlay_session_num)
 export(pdf_overlay_stamps_each)
+export(set_af_fp)
+export(set_auto_filter)
+export(set_freeze_panel)
+export(validate_package)
 importFrom(magrittr,"%>%")
