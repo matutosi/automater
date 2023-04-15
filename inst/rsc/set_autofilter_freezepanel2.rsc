@@ -6,7 +6,7 @@ if(! pkg %in% installed.packages()[,1]){
 
 pkg <- "automater"
 if(! pkg %in% installed.packages()[,1]){
-  devtools::install_github("matutosi/automater")
+  devtools::install_github("matutosi/automater", force = TRUE)
 }
 
 automater::validate_package("xlsx")
