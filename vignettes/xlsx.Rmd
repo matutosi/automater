@@ -14,6 +14,50 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, eval = FALSE}
 library(automater)
+automater::validate_package("xlsx")
+```
+
+
+Set autofilter and freeze panel of all excell files (xls and xlsx) in a directoy using set_af_fp() function.
+
+```{r eval = FALSE}
+files <- list.files(pattern = "xls")
+for(file in files){
+  automater::set_af_fp(file)
+}
+```
+
+To run set_af_fp() automatically, use set_autofilter_freezepanel2.rsc in rsc directory in automater package.
+
+- Save set_autofilter_freezepanel2.rsc to a directory.    
+  You can copy set_autofilter_freezepanel2.rsc by code below.    
+
+```{r eval = FALSE}
+rsc <- system.file("rsc/set_autofilter_freezepanel2.rsc", package = "automater")
+target_dir <- "c:/" # set your directory
+file.copy(rsc, target_dir)
+```
+
+- Associate extension .rsc with Rscript.exe.    
+  https://www.computerhope.com/issues/ch000572.htm    
+
+<!--
+  # assoc .rsc=rscript
+  # ftype rscript="D:\pf\R\R-4.2.3\bin\x64\Rscript.exe" "%1"
+  # file.path(R.home(), "bin", "x64", "Rscript.exe")
+  # assoc .rsc
+  # ftype rscript
+-->
+
+- Copy excell files to the same direcotry with set_autofilter_freezepanel2.rsc.   
+- Click set_autofilter_freezepanel2.rsc.   
+- Then a black command windows will be opend and wait a moment.   
+
+Contents of set_autofilter_freezepanel2.rsc is shown below. 
+
+```{r}
+rsc <- system.file("rsc/set_autofilter_freezepanel2.rsc", package = "automater")
+cat(readtext::readtext(rsc, verbosity = 0)$text)
 ```
