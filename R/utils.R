@@ -1,16 +1,17 @@
 #' Check package installation and install it when not yet.
 #' 
-#' 
-#' 
-#' @name pkg      A string of package names.
-#' @param reposs  A string of url for repository
-
+#' @param pkg    A string of package names.
+#' @param repos  A string of url for repository
 #' @examples
+#' \donttest{
+#' validate_package("automater")
+#' validate_package("xlsx")
+#' }
 #' 
 #' @export
 validate_package <- function(pkg, repos = "https://cran.ism.ac.jp/"){
-  if(! pkg %in% installed.packages()[,1]){
+  if(! pkg %in% utils::installed.packages()[,1]){
     options(repos = repos)
-    install.packages(pkg)
+    utils::install.packages(pkg)
   }
 }

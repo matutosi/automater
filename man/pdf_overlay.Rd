@@ -5,7 +5,7 @@
 \alias{pdf_overlay_stamps_each}
 \alias{pdf_overlay_page_num}
 \alias{pdf_overlay_session_num}
-\title{Wrapper function to overlay page numbers and other numvers using package qpdf.}
+\title{Wrapper functions to overlay page numbers and other numvers using package qpdf.}
 \usage{
 pdf_overlay_stamps_each(input, stamp, start = 1, end = NULL)
 
@@ -36,8 +36,10 @@ pdf_length(), pdf_split(), pdf_subset(), pdf_combine(),
 pdf_compress(), pdf_rotate_pages(), pdf_overlay_stamp().
 }
 \examples{
-input <- file.path(find.package("automater"), "pdf/00_sn_a.pdf")
+\dontrun{
+input <- system.file("pdf/00_sn_a.pdf", package = "automater")
 pdf_overlay_page_num(input, start = 11, end = -3)
 pdf_overlay_session_num(input, session = "b")
+}
 
 }

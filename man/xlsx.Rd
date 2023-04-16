@@ -2,17 +2,35 @@
 % Please edit documentation in R/xlsx.R
 \name{xlsx}
 \alias{xlsx}
+\alias{set_af_fp}
 \alias{set_auto_filter}
-\title{Wrapper function to manipulate excel work books and sheets.}
+\alias{set_freeze_panel}
+\title{Wrapper functions to manipulate excel work books and sheets using package xlsx.}
 \usage{
+set_af_fp(file)
+
 set_auto_filter(sh)
+
+set_freeze_panel(sh)
 }
 \arguments{
-\item{sh}{A excel sheet.}
-
 \item{file}{A string of excel file name.}
+
+\item{sh}{A excel sheet.}
 }
 \description{
-Package xlsx <>
+Package xlsx \url{https://cran.r-project.org/web/packages/xlsx/index.html}
 incudes usefull functions as shown bellow.
+read.xlsx(), read.xlsx2(), write.xlsx(), write.xlsx2(),
+addAutoFilter(), createFreezePane(), createWorkbook(), saveWorkbook(),
+and mores.
+}
+\examples{
+\donttest{
+files <- list.files(pattern = "xls")
+for(file in files){
+  automater::set_af_fp(file)
+}
+}
+
 }

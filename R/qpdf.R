@@ -1,4 +1,4 @@
-#' Wrapper function to overlay page numbers and other numvers using package qpdf.
+#' Wrapper functions to overlay page numbers and other numvers using package qpdf.
 #' 
 #' Package qpdf <https://cran.r-project.org/web/packages/qpdf/index.html>
 #' incudes usefull functions as shown bellow.
@@ -16,9 +16,11 @@
 #'                     pdf directory include '00_sn_a.pdf', '00_sn_b.pdf', and '00_sn_p.pdf' 
 #'                     by default.
 #' @examples
-#' input <- file.path(find.package("automater"), "pdf/00_sn_a.pdf")
+#' \dontrun{
+#' input <- system.file("pdf/00_sn_a.pdf", package = "automater")
 #' pdf_overlay_page_num(input, start = 11, end = -3)
 #' pdf_overlay_session_num(input, session = "b")
+#' }
 #' 
 #' @return  A string of output pdf file.
 #' @export
@@ -39,7 +41,7 @@ pdf_overlay_stamps_each <- function(input, stamp, start = 1, end = NULL){
   for(i in seq_along(pages_body)){
     out[[i]] <- qpdf::pdf_overlay_stamp(inputs[pages_body[i]], stamps[i])
   }
-  out <- na.omit(c(inputs[pages_pre], unlist(out), inputs[pages_post]))
+  out <- stats::na.omit(c(inputs[pages_pre], unlist(out), inputs[pages_post]))
   outfile <- qpdf::pdf_combine(out, "out.pdf")
   file.remove(inputs)
   file.remove(stamps)
