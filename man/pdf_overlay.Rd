@@ -5,7 +5,7 @@
 \alias{pdf_overlay_stamps_each}
 \alias{pdf_overlay_page_num}
 \alias{pdf_overlay_session_num}
-\title{Wrapper functions to overlay page numbers and other numvers using package qpdf.}
+\title{Wrapper functions to overlay page numbers and others using package qpdf.}
 \usage{
 pdf_overlay_stamps_each(input, stamp, start = 1, end = NULL)
 
@@ -31,7 +31,7 @@ A string of output pdf file.
 }
 \description{
 Package qpdf \url{https://cran.r-project.org/web/packages/qpdf/index.html}
-incudes usefull functions as shown bellow.
+includes useful functions as shown bellow.
 pdf_length(), pdf_split(), pdf_subset(), pdf_combine(),
 pdf_compress(), pdf_rotate_pages(), pdf_overlay_stamp().
 }

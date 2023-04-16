@@ -20,7 +20,7 @@ automater::validate_package("xlsx")
 ```
 
 
-Set autofilter and freeze panel of all excell files (xls and xlsx) in a directoy using set_af_fp() function.
+Set autofilter and freeze panel of all excel files (xls and xlsx) in a directory using set_af_fp() function.
 
 ```{r eval = FALSE}
 files <- list.files(pattern = "xls")
@@ -51,9 +51,9 @@ file.copy(rsc, target_dir)
   # ftype rscript
 -->
 
-- Copy excell files to the same direcotry with set_autofilter_freezepanel2.rsc.   
+- Copy excel files to the same directory with set_autofilter_freezepanel2.rsc.   
 - Click set_autofilter_freezepanel2.rsc.   
-- Then a black command windows will be opend and wait a moment.   
+- Then a black command windows will be opened and wait a moment.   
 
 Contents of set_autofilter_freezepanel2.rsc is shown below. 
 

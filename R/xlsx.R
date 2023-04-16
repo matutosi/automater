@@ -1,7 +1,7 @@
 #' Wrapper functions to manipulate excel work books and sheets using package xlsx. 
 #' 
 #' Package xlsx <https://cran.r-project.org/web/packages/xlsx/index.html>
-#' incudes usefull functions as shown bellow.
+#' includes useful functions as shown bellow.
 #' read.xlsx(), read.xlsx2(), write.xlsx(), write.xlsx2(), 
 #' addAutoFilter(), createFreezePane(), createWorkbook(), saveWorkbook(),
 #' and mores.

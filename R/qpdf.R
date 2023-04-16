@@ -1,7 +1,7 @@
-#' Wrapper functions to overlay page numbers and other numvers using package qpdf.
+#' Wrapper functions to overlay page numbers and others using package qpdf.
 #' 
 #' Package qpdf <https://cran.r-project.org/web/packages/qpdf/index.html>
-#' incudes usefull functions as shown bellow.
+#' includes useful functions as shown bellow.
 #' pdf_length(), pdf_split(), pdf_subset(), pdf_combine(), 
 #' pdf_compress(), pdf_rotate_pages(), pdf_overlay_stamp().
 #' 
