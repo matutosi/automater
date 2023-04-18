@@ -63,6 +63,6 @@ file.copy(rsc, target_dir)
 Contents of orc_tesseract.rsc is shown below. 
 
 ```{r}
-rsc <- system.file("rsc/orc_tesseract.rsc", package = "automater")
+rsc <- system.file("rsc/ocr_tesseract.rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 ```
