@@ -12,6 +12,10 @@
 #' @retuen  A string.
 #' @examples
 #' \donttest{
+#' library(automater)
+#' tmp <- tempfile()
+#' curl::curl_download("https://jeroen.github.io/images/testocr.png", tmp)
+#' ocr_tesseract(tmp)
 #' }
 #' 
 #' @export
@@ -22,5 +26,3 @@ ocr_tesseract <- function(img, lng = "jpn", binarization = NULL){
   text <- tesseract::ocr(img, engine = tesseract::tesseract(lng))
   return(text)
 }
-
-

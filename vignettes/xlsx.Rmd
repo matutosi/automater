@@ -29,13 +29,13 @@ for(file in files){
 }
 ```
 
-To run set_af_fp() automatically, use set_autofilter_freezepanel2.rsc in rsc directory in automater package.
+To run set_af_fp() automatically, use set_autofilter_freezepanel.rsc in rsc directory within automater package.
 
-- Save set_autofilter_freezepanel2.rsc to a directory.    
-  You can copy set_autofilter_freezepanel2.rsc by code below.    
+- Save set_autofilter_freezepanel.rsc to a directory.    
+  You can copy set_autofilter_freezepanel.rsc by code below.    
 
 ```{r eval = FALSE}
-rsc <- system.file("rsc/set_autofilter_freezepanel2.rsc", package = "automater")
+rsc <- system.file("rsc/set_autofilter_freezepanel.rsc", package = "automater")
 target_dir <- "c:/" # set your directory
 file.copy(rsc, target_dir)
 ```
@@ -51,13 +51,13 @@ file.copy(rsc, target_dir)
   # ftype rscript
 -->
 
-- Copy excel files to the same directory with set_autofilter_freezepanel2.rsc.   
-- Click set_autofilter_freezepanel2.rsc.   
+- Copy excel files to the same directory with set_autofilter_freezepanel.rsc.   
+- Click set_autofilter_freezepanel.rsc.   
 - Then a black command windows will be opened and wait a moment.   
 
-Contents of set_autofilter_freezepanel2.rsc is shown below. 
+Contents of set_autofilter_freezepanel.rsc is shown below. 
 
 ```{r}
-rsc <- system.file("rsc/set_autofilter_freezepanel2.rsc", package = "automater")
+rsc <- system.file("rsc/set_autofilter_freezepanel.rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 ```

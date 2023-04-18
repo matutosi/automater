@@ -29,7 +29,7 @@ pdf_overlay_stamps_each <- function(input, stamp, start = 1, end = NULL){
   len_stamp <- qpdf::pdf_length(stamp)
   if(is.null(end)){ end <- len_input }
   if(end < 0     ){ end <- len_input + end}
-  validate_length(len_input, len_stamp, start, end)
+  validate_page(len_input, len_stamp, start, end)
   pages_inputs <- seq(to = len_input)
     # +1 means out of bounds, inputs[pages_pre]: NA
   pages_pre    <- if(start != 1      ){ seq(to = start - 1)                 } else { len_input + 1 }
@@ -49,7 +49,7 @@ pdf_overlay_stamps_each <- function(input, stamp, start = 1, end = NULL){
   return(outfile)
 }
 
-validate_length <- function(len_input, len_stamp, start, end){
+validate_page <- function(len_input, len_stamp, start, end){
   if(end       < start)    { stop("end must be larger than start!") }
   if(len_input < start)    { stop("input pages must be larger than start!") }
   if(len_input < end  )    { stop("input pages must be larger than end!") }

@@ -1,3 +1,22 @@
+  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  # 
+  # How to use ocr.rsc
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+
   # Prepare
 pkg <- "devtools"
 if(! pkg %in% installed.packages()[,1]){
@@ -10,11 +29,14 @@ if(! pkg %in% installed.packages()[,1]){
 }
 
 automater::validate_package("tesseract")
-
-  # Run
-files <- list.files(pattern = "png|jpg|jepg|gif|tif|tiff|bmp")
-for(file in files){
-  print(automater::ocr_tesseract(file))
+lng <- "jpn"
+if(! lng %in% tesseract::tesseract_info()$available){
+  tesseract::tesseract_download(lng)
 }
 
-setwd("D:/matu/work/ToDo/automater/inst/rsc")
+  # Run
+files <- list.files(pattern = "bmp|gif|png|tif|tiff")
+for(file in files){
+  text <- automater::ocr_tesseract(file)
+  writeLines(text, paste0(file, ".txt"))
+}
