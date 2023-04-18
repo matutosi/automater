@@ -15,7 +15,7 @@
 #' }
 #' 
 #' @export
-ocr_tesseract <- function(img, lang = "jpn", binarization = NULL){
+ocr_tesseract <- function(img, lng = "jpn", binarization = NULL){
   if(!is.null(binarization)){
     img <- image.binarization::image_binarization(img, type = binarization)
   }
