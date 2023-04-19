@@ -25,6 +25,18 @@ Translate with package deeplr.
 
 ```{r eval = FALSE}
 api_key <- "set_your_key"
+  # Example: from "I am a cat" by Soseki Natsume
+sentences <- c("I am a cat. I don't have a name yet.", 
+               "I have no idea where I was born.")
+tibble::tibble(en = sentences) %>%
+  dplyr::mutate(`:=`("jp", deepl_api(en, api_key = api_key)))
+}
+```
+
+Read files, translate, and write them. 
+
+```{r eval = FALSE}
+api_key <- "set_your_key"
 files <- list.files(pattern = "\\.txt")
 for(file in files){
   txt <- utils::read.table(file, sep = "\t", col.names = "en")

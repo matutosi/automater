@@ -20,16 +20,3 @@ A character translated by deepl
 \description{
 Package deeplr \url{https://cran.r-project.org/web/packages/deeplr/index.html}
 }
-\examples{
-\donttest{
-library(dplyr)
-library(deeplr)
-  # Example: "I am a cat" by Soseki Natsume
-sentences <- c("I am a cat. I don't have a name yet.", 
-               "I have no idea where I was born.")
-api_key <- "set_your_key"
-tibble::tibble(en = sentences) \%>\%
-  dplyr::mutate(`:=`("jp", deepl_api(en, api_key = api_key))
-}
-
-}

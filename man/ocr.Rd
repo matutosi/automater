@@ -10,12 +10,12 @@ ocr_tesseract(img, lng = "jpn", binarization = NULL)
 \arguments{
 \item{img}{A string of image file path.}
 
-\item{binarization}{A string with the type of binarization to use.
-See detail in image.binarization::image_binarization.}
-
-\item{lang}{A string with language for tesseract engine
+\item{lng}{A string with language for tesseract engine
 See detail in tesseract::ocr and tesseract::tesseract.
 Need to download engine by tesseract_download().}
+
+\item{binarization}{A string with the type of binarization to use.
+See detail in image.binarization::image_binarization.}
 }
 \value{
 A string.

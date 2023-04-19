@@ -14,14 +14,21 @@ URL: https://github.com/matutosi/automater
      https://github.com/matutosi/automater/tree/develop (devel)
 LazyData: true
 Imports: 
-    xlsx,
-    qpdf,
+    RSelenium,
+    deeplr,
+    image.binarization,
     magrittr,
-    utils
+    qpdf,
+    rvest,
+    utils,
+    xlsx,
+    xml2
 Suggests:
+    curl,
     tesseract,
     Microsoft365R,
     dplyr,
+    purrr,
     readtext,
     rlang,
     stringr,

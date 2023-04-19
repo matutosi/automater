@@ -4,7 +4,7 @@
 #' 
 #' @name ocr
 #' @param img          A string of image file path.
-#' @param lang         A string with language for tesseract engine
+#' @param lng          A string with language for tesseract engine
 #'                     See detail in tesseract::ocr and tesseract::tesseract.
 #'                     Need to download engine by tesseract_download().
 #' @param binarization A string with the type of binarization to use. 
