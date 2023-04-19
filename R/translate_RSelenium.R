@@ -4,17 +4,6 @@
 #' 
 #' Package deeplr <https://cran.r-project.org/web/packages/deeplr/index.html>
 #' 
-#' @name deeplr
-#' @param 
-#' @retuen  
-#' @examples
-#' \donttest{
-#' }
-#' }
-#' 
-#' @export
-
-
 #' Use deepl by api (deepl_api()) and free (deepl_free())
 #' For polite scraping sleep >5 sec in a running of deepl_free().
 #' 
@@ -26,7 +15,7 @@
 #'        Use capital letters in deepl_api(), and small letters in deepl_free().
 #' @return A character translated by deepl
 #' 
-#' @example
+#' @examples
 #' library(RSelenium)
 #' library(tidyverse)
 #' library(deeplr)

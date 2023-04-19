@@ -5,23 +5,30 @@
 \alias{ocr_tesseract}
 \title{Wrapper functions for ocr using package tesseract.}
 \usage{
-ocr_tesseract(img, lang = "jpn", binarization = NULL)
+ocr_tesseract(img, lng = "jpn", binarization = NULL)
 }
 \arguments{
 \item{img}{A string of image file path.}
 
+\item{binarization}{A string with the type of binarization to use.
+See detail in image.binarization::image_binarization.}
+
 \item{lang}{A string with language for tesseract engine
 See detail in tesseract::ocr and tesseract::tesseract.
 Need to download engine by tesseract_download().}
-
-\item{binarization}{A string with the type of binarization to use.
-See detail in image.binarization::image_binarization.}
+}
+\value{
+A string.
 }
 \description{
 Package tesseract \url{https://cran.r-project.org/web/packages/tesseract/index.html}
 }
 \examples{
 \donttest{
+library(automater)
+tmp <- tempfile()
+curl::curl_download("https://jeroen.github.io/images/testocr.png", tmp)
+ocr_tesseract(tmp)
 }
 
 }

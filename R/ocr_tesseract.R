@@ -9,7 +9,7 @@
 #'                     Need to download engine by tesseract_download().
 #' @param binarization A string with the type of binarization to use. 
 #'                     See detail in image.binarization::image_binarization.
-#' @retuen  A string.
+#' @return  A string.
 #' @examples
 #' \donttest{
 #' library(automater)

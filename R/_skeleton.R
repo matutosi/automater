@@ -11,7 +11,7 @@
 #' 
 #' @name NAME
 #' @param 
-#' @retuen  
+#' @return  
 #' @examples
 #' \donttest{
 #' }
