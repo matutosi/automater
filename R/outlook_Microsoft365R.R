@@ -56,7 +56,7 @@ send_email <- function(emails){
 add_attachment <- function(emails, df){
   attachment <- df[["attachment"]]
   for(i in seq_along(emails)){
-    if(attachment[i] != ""){
+    if(!is.na(attachment[i]) & attachment[i] != ""){
       files <- strsplit(attachment[i], ",")[[1]]
       files <- gsub(" ", "", files)
         for(f in files){
@@ -64,4 +64,5 @@ add_attachment <- function(emails, df){
         }
     }
   }
+  return(emails)
 }
