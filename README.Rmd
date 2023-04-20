@@ -34,6 +34,18 @@ See vignettes.
 
 https://github.com/matutosi/automater/tree/main/vignettes
 
+- OCR with tesseract   
+https://github.com/matutosi/automater/blob/main/vignettes/ocr_tesseract.md   
+
+- Send outlook emails with Microsoft365R   
+https://github.com/matutosi/automater/blob/main/vignettes/outlook_Microsoft365R.md   
+
+- Set autofilter and freeze panel with xlsx   
+https://github.com/matutosi/automater/blob/main/vignettes/xlsx.md   
+
+- Translate with deeplr   
+https://github.com/matutosi/automater/blob/main/vignettes/translate_deeplr.md
+
 
 <!-- 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. 
