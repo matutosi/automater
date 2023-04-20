@@ -53,7 +53,7 @@ If you want not to send emails but only make draft,
 
 Contents of ....rsc is shown below. 
 
-```{r}
+```{r eval = FALSE}
 rsc <- system.file("rsc/....rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 ```

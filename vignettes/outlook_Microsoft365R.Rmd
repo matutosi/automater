@@ -41,7 +41,7 @@ file.copy(rsc, target_dir)
   https://www.computerhope.com/issues/ch000572.htm    
 
 - Copy an excel file to the same directory with outlook_Microsoft365.rsc.   
-  The excel file including colums below. 
+  The excel file including columns below. 
   - "to" (required), 
   - "subject" (almost required)
   - "body" (almost required)
@@ -65,6 +65,6 @@ automater::create_email(path, outlook, send = FALSE)
 Contents of outlook_Microsoft365.rsc is shown below. 
 
 ```{r}
-rsc <- system.file("rsc/outlook_Microsoft365.rsc", package = "automater")
+rsc <- system.file("rsc/outlook_Microsoft365R.rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 ```

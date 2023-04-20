@@ -19,6 +19,7 @@ Imports:
     image.binarization,
     magrittr,
     qpdf,
+    readxl,
     rvest,
     utils,
     xlsx,

@@ -3,3 +3,7 @@
 ^LICENSE\.md$
 ^data-raw$
 ^README\.Rmd$
+^R\_skeleton.R$
+^rsc\_skelton.rsc$
+^vignettes\_skelton.Rmd$
+^inst\rsc\_skelton.rsc$

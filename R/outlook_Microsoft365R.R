@@ -1,4 +1,4 @@
-#' Wrapper function to create and send outlook emails based on the contents of excel file using pakcage Microsoft365R.
+#' Wrapper function to create and send outlook emails based on the contents of excel file using package Microsoft365R.
 #' 
 #' Package Microsoft365R <https://cran.r-project.org/web/packages/Microsoft365R/index.html>
 #' 
@@ -16,14 +16,16 @@
 #' @return  A list of ms_outlook_email class.
 #' 
 #' @examples
+#' \dontrun{
 #' outlook <- Microsoft365R::get_business_outlook()
 #' path <- "outlook.xlsx"
 #' create_email(path, outlook, send = TRUE)
+#' }
 #' 
 #' @export
 create_email <- function(path, outlook, send = TRUE){
   df <- readxl::read_xlsx(path)
-  emails <- gen_email(df)
+  emails <- gen_email(outlook, df)
   if("attachment" %in% colnames(df)){
     emails <- add_attachment(emails, df)
   }
@@ -35,10 +37,10 @@ create_email <- function(path, outlook, send = TRUE){
 
 #' @rdname outlook
 #' @export
-gen_email <- function(df){
+gen_email <- function(outlook, df){
   cols <- c("to", "subject", "body", "cc", "bcc")
   df %>%
-    dplyr::select(any_of(cols)) %>%
+    dplyr::select(dplyr::any_of(cols)) %>%
     purrr::pmap(outlook$create_email)
 }
 
@@ -55,9 +57,8 @@ add_attachment <- function(emails, df){
   attachment <- df[["attachment"]]
   for(i in seq_along(emails)){
     if(attachment[i] != ""){
-      files <- 
-        strsplit(attachment[i], ",")[[1]] %>%
-        gsub(" ", "", .)
+      files <- strsplit(attachment[i], ",")[[1]]
+      files <- gsub(" ", "", files)
         for(f in files){
           emails[[i]] <- emails[[i]]$add_attachment(f)
         }

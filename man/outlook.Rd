@@ -6,11 +6,11 @@
 \alias{gen_email}
 \alias{send_email}
 \alias{add_attachment}
-\title{Wrapper function to create and send outlook emails based on the contents of excel file using pakcage Microsoft365R.}
+\title{Wrapper function to create and send outlook emails based on the contents of excel file using package Microsoft365R.}
 \usage{
 create_email(path, outlook, send = TRUE)
 
-gen_email(df)
+gen_email(outlook, df)
 
 send_email(emails)
 
@@ -39,8 +39,10 @@ A list of ms_outlook_email class.
 Package Microsoft365R \url{https://cran.r-project.org/web/packages/Microsoft365R/index.html}
 }
 \examples{
+\dontrun{
 outlook <- Microsoft365R::get_business_outlook()
 path <- "outlook.xlsx"
 create_email(path, outlook, send = TRUE)
+}
 
 }
