@@ -40,7 +40,7 @@ file.copy(rsc, target_dir)
 - Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
-- Copy an excel file to the same directory with outlook_Microsoft365.rsc.   
+- Copy an excel file (outlook_Microsoft365R.xlsx) to the same directory with outlook_Microsoft365.rsc.   
   The excel file including columns below. 
   - "to" (required), 
   - "subject" (almost required)
@@ -58,7 +58,7 @@ If you want not to send emails but only make draft, set "send = FALSE" in the sc
 
 ```{r eval = FALSE}
 outlook <- Microsoft365R::get_business_outlook()
-path <- "outlook.xlsx"
+path <- "outlook_Microsoft365R.xlsx"
 automater::create_email(path, outlook, send = FALSE)
 ```
 

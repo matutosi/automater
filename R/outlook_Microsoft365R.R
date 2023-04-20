@@ -18,7 +18,7 @@
 #' @examples
 #' \dontrun{
 #' outlook <- Microsoft365R::get_business_outlook()
-#' path <- "outlook.xlsx"
+#' path <- "outlook_Microsoft365R.xlsx"
 #' create_email(path, outlook, send = TRUE)
 #' }
 #' 
