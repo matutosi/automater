@@ -41,7 +41,7 @@ Package Microsoft365R \url{https://cran.r-project.org/web/packages/Microsoft365R
 \examples{
 \dontrun{
 outlook <- Microsoft365R::get_business_outlook()
-path <- "outlook.xlsx"
+path <- "outlook_Microsoft365R.xlsx"
 create_email(path, outlook, send = TRUE)
 }
 

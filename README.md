@@ -1,39 +1,23 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # automater
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of automater is to automate boring stuff using R with various packages. 
+The goal of automater is to automate boring stuff using R with various
+packages.
 
 ## Installation
 
 You can install the development version of automater.
 
-```{r, include = FALSE}
-devtools::install_github("matutosi/automater")
-```
-
 ## Example
 
-See vignettes. 
+See vignettes.
 
-https://github.com/matutosi/automater/tree/main/vignettes
-
+<https://github.com/matutosi/automater/tree/main/vignettes>
 
 <!-- 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. 
