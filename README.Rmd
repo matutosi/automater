@@ -24,7 +24,7 @@ The goal of automater is to automate boring stuff using R with various packages.
 
 You can install the development version of automater.
 
-```{r, include = FALSE}
+```{r, eval = FALSE}
 devtools::install_github("matutosi/automater")
 ```
 

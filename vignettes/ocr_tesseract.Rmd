@@ -1,11 +1,14 @@
 ---
 title: "ocr with tesseract"
-output: rmarkdown::html_vignette
+output: 
+  html_document:
     keep_md: true
-vignette: >
-  %\VignetteIndexEntry{ocr_tesseract}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  # rmarkdown::html_vignette:
+  #   keep_md: true
+  # vignette: >
+  #   %\VignetteIndexEntry{ocr_tesseract}
+  #   %\VignetteEngine{knitr::rmarkdown}
+  #   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}

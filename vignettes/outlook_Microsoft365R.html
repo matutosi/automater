@@ -11,7 +11,7 @@
 
 
 
-<title>xlsx</title>
+<title>Send outlook email with Microsoft365R</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,53 +348,62 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">xlsx</h1>
+<h1 class="title toc-ignore">Send outlook email with Microsoft365R</h1>
 
 </div>
 
 
 <pre class="r"><code>library(automater)
-automater::validate_package(&quot;xlsx&quot;)</code></pre>
-<p>Set autofilter and freeze panel of all excel files (xls and xlsx) in
-a directory using set_af_fp() function.</p>
-<pre class="r"><code>files &lt;- list.files(pattern = &quot;xls&quot;)
-for(file in files){
-  automater::set_af_fp(file)
-}</code></pre>
-<p>To run set_af_fp() automatically, use set_autofilter_freezepanel.rsc
-in rsc directory within automater package.</p>
+automater::validate_package(&quot;Microsoft365R&quot;)</code></pre>
+<p>Send outlook emails based on the contents of excel file using
+automater::create_email() function.</p>
+<p>To run automater::create_email() automatically, use
+outlook_Microsoft365.rsc in rsc directory within automater package.</p>
 <ul>
-<li>Save set_autofilter_freezepanel.rsc to a directory.<br />
-You can copy set_autofilter_freezepanel.rsc by code below.</li>
+<li>Save outlook_Microsoft365.rsc to a directory.<br />
+You can copy outlook_Microsoft365.rsc by code below.</li>
 </ul>
-<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/set_autofilter_freezepanel.rsc&quot;, package = &quot;automater&quot;)
+<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/outlook_Microsoft365.rsc&quot;, package = &quot;automater&quot;)
 target_dir &lt;- &quot;c:/&quot; # set your directory
 file.copy(rsc, target_dir)</code></pre>
 <ul>
-<li>Associate extension .rsc with Rscript.exe.<br />
-<a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></li>
-</ul>
-<!--
-  # assoc .rsc=rscript
-  # ftype rscript="D:\pf\R\R-4.2.3\bin\x64\Rscript.exe" "%1"
-  # file.path(R.home(), "bin", "x64", "Rscript.exe")
-  # assoc .rsc
-  # ftype rscript
--->
+<li><p>Associate extension .rsc with Rscript.exe.<br />
+<a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></p></li>
+<li><p>Copy an excel file (outlook_Microsoft365R.xlsx) to the same
+directory with outlook_Microsoft365.rsc.<br />
+The excel file including columns below.</p>
 <ul>
-<li>Copy excel files to the same directory with
-set_autofilter_freezepanel.rsc.<br />
-</li>
-<li>Click set_autofilter_freezepanel.rsc.<br />
-</li>
-<li>Then a black command windows will be opened and wait a moment.</li>
+<li>“to” (required),</li>
+<li>“subject” (almost required)</li>
+<li>“body” (almost required)</li>
+<li>“cc” (optional)</li>
+<li>“bcc” (optional)</li>
+<li>“attachment” (optional): path to files separated with comma
+(“,”)</li>
+</ul></li>
+<li><p>Click outlook_Microsoft365.rsc.<br />
+</p></li>
+<li><p>Then a black command windows will be opened and wait a
+moment.<br />
+</p></li>
+<li><p>At the first time to run outlook_Microsoft365.rsc, browser stars
+and ask for your ID and password for authorization.<br />
+</p></li>
+<li><p>Input ID and password, then you will be authorized.<br />
+</p></li>
+<li><p>After authorization, close browser.</p></li>
 </ul>
-<p>Contents of set_autofilter_freezepanel.rsc is shown below.</p>
-<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/set_autofilter_freezepanel.rsc&quot;, package = &quot;automater&quot;)
+<p>If you want not to send emails but only make draft, set “send =
+FALSE” in the script.</p>
+<pre class="r"><code>outlook &lt;- Microsoft365R::get_business_outlook()
+path &lt;- &quot;outlook_Microsoft365R.xlsx&quot;
+automater::create_email(path, outlook, send = FALSE)</code></pre>
+<p>Contents of outlook_Microsoft365.rsc is shown below.</p>
+<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/outlook_Microsoft365R.rsc&quot;, package = &quot;automater&quot;)
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt;   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #&gt;   # 
-#&gt;   # See https://github.com/matutosi/automater/blob/main/vignettes/xlsx.Rmd
+#&gt;   # See https://github.com/matutosi/automater/blob/main/vignettes/outlook_Microsoft365R.Rmd
 #&gt;   # 
 #&gt;   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #&gt; 
@@ -409,13 +418,12 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt;   devtools::install_github(&quot;matutosi/automater&quot;, force = TRUE)
 #&gt; }
 #&gt; 
-#&gt; automater::validate_package(&quot;xlsx&quot;)
+#&gt; automater::validate_package(&quot;Microsoft365R&quot;)
 #&gt; 
 #&gt;   # Run
-#&gt; files &lt;- list.files(pattern = &quot;xls&quot;)
-#&gt; for(file in files){
-#&gt;   automater::set_af_fp(file)
-#&gt; }</code></pre>
+#&gt; outlook &lt;- Microsoft365R::get_business_outlook()
+#&gt; path &lt;- &quot;d:/outlook_Microsoft365R.xlsx&quot;
+#&gt; automater::create_email(path, outlook, send = TRUE)</code></pre>
 
 
 

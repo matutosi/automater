@@ -11,14 +11,10 @@ output:
   #   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
-```{r setup, eval = FALSE}
+
+
+```r
 library(automater)
 automater::validate_package("xlsx")
 ```
@@ -26,7 +22,8 @@ automater::validate_package("xlsx")
 
 Set autofilter and freeze panel of all excel files (xls and xlsx) in a directory using set_af_fp() function.
 
-```{r eval = FALSE}
+
+```r
 files <- list.files(pattern = "xls")
 for(file in files){
   automater::set_af_fp(file)
@@ -38,7 +35,8 @@ To run set_af_fp() automatically, use set_autofilter_freezepanel.rsc in rsc dire
 - Save set_autofilter_freezepanel.rsc to a directory.    
   You can copy set_autofilter_freezepanel.rsc by code below.    
 
-```{r eval = FALSE}
+
+```r
 rsc <- system.file("rsc/set_autofilter_freezepanel.rsc", package = "automater")
 target_dir <- "c:/" # set your directory
 file.copy(rsc, target_dir)
@@ -61,7 +59,32 @@ file.copy(rsc, target_dir)
 
 Contents of set_autofilter_freezepanel.rsc is shown below. 
 
-```{r}
+
+```r
 rsc <- system.file("rsc/set_autofilter_freezepanel.rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#>   # 
+#>   # See https://github.com/matutosi/automater/blob/main/vignettes/xlsx.Rmd
+#>   # 
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#> 
+#>   # Prepare
+#> pkg <- "devtools"
+#> if(! pkg %in% installed.packages()[,1]){
+#>   install.packages(pkg, repo = "https://cran.ism.ac.jp/")
+#> }
+#> 
+#> pkg <- "automater"
+#> if(! pkg %in% installed.packages()[,1]){
+#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> }
+#> 
+#> automater::validate_package("xlsx")
+#> 
+#>   # Run
+#> files <- list.files(pattern = "xls")
+#> for(file in files){
+#>   automater::set_af_fp(file)
+#> }
 ```

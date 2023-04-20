@@ -11,14 +11,10 @@ output:
   #   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
-```{r setup, eval = FALSE}
+
+
+```r
 library(automater)
 automater::validate_package("deeplr")
 automater::validate_package("dplyr")
@@ -27,7 +23,8 @@ automater::validate_package("dplyr")
 
 Translate with package deeplr. 
 
-```{r eval = FALSE}
+
+```r
 api_key <- "set_your_key"
   # Example: from "I am a cat" by Soseki Natsume
 sentences <- c("I am a cat. I don't have a name yet.", 
@@ -39,7 +36,8 @@ tibble::tibble(en = sentences) %>%
 
 Read files, translate, and write them. 
 
-```{r eval = FALSE}
+
+```r
 api_key <- "set_your_key"
 files <- list.files(pattern = "\\.txt")
 for(file in files){
@@ -57,7 +55,8 @@ When input file name is "neko.txt", output file will be "translated_neko.txt"
 - Save translate_deeplr.rsc to a directory.    
   You can copy translate_deeplr.rsc by code below.    
 
-```{r eval = FALSE}
+
+```r
 rsc <- system.file("rsc/translate_deeplr.rsc", package = "automater")
 target_dir <- "c:/" # set your directory
 file.copy(rsc, target_dir)
@@ -73,7 +72,48 @@ file.copy(rsc, target_dir)
 
 Contents of translate_deeplr.rsc is shown below. 
 
-```{r}
+
+```r
 rsc <- system.file("rsc/translate_deeplr.rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#>   # 
+#>   # See https://github.com/matutosi/automater/blob/main/vignettes/translate_deeplr.Rmd
+#>   # 
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#> 
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#>   #  
+#>   # Setting (required)
+#>   #  
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#>   #  
+#> api_key <- "set_your_key"
+#>   #  
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#> 
+#> 
+#>   # Prepare
+#> pkg <- "devtools"
+#> if(! pkg %in% installed.packages()[,1]){
+#>   install.packages(pkg, repo = "https://cran.ism.ac.jp/")
+#> }
+#> 
+#> pkg <- "automater"
+#> if(! pkg %in% installed.packages()[,1]){
+#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> }
+#> 
+#> automater::validate_package("deeplr")
+#> automater::validate_package("dplyr")
+#> 
+#>   # Run
+#> api_key <- "set_your_key"
+#> files <- list.files(pattern = "\\.txt")
+#> for(file in files){
+#>   txt <- utils::read.table(file, sep = "\t", col.names = "en")
+#>   txt <- dplyr::mutate(txt, `:=`("jp", deepl_api(str = en, api_key = api_key)))
+#>   utils::write.table(txt, paste0("translated_", file), quote = FALSE, sep = "\t", row.names = FALSE)
+#> }
 ```

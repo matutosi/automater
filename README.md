@@ -13,6 +13,10 @@ packages.
 
 You can install the development version of automater.
 
+``` r
+devtools::install_github("matutosi/automater")
+```
+
 ## Example
 
 See vignettes.

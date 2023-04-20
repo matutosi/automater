@@ -1,10 +1,14 @@
 ---
 title: "ocr with tesseract"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{ocr_tesseract}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: 
+  html_document:
+    keep_md: true
+  # rmarkdown::html_vignette:
+  #   keep_md: true
+  # vignette: >
+  #   %\VignetteIndexEntry{ocr_tesseract}
+  #   %\VignetteEngine{knitr::rmarkdown}
+  #   %\VignetteEncoding{UTF-8}
 ---
 
 
@@ -66,8 +70,7 @@ rsc <- system.file("rsc/ocr_tesseract.rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 #>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #>   # 
-#>   # How to use ocr.rsc
-#>   # 
+#>   # See https://github.com/matutosi/automater/blob/main/vignettes/ocr_tesseract.Rmd
 #>   # 
 #>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #> 
