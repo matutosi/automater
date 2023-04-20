@@ -1,0 +1,59 @@
+---
+title: "NAME"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{NAME}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = FALSE}
+library(automater)
+automater::validate_package("")
+```
+
+
+... using () function.
+
+```{r eval = FALSE}
+
+```
+
+To run () automatically, use ....rsc in rsc directory within automater package.
+
+- Save ....rsc to a directory.    
+  You can copy ....rsc by code below.    
+
+```{r eval = FALSE}
+rsc <- system.file("rsc/....rsc", package = "automater")
+target_dir <- "c:/" # set your directory
+file.copy(rsc, target_dir)
+```
+
+- Associate extension .rsc with Rscript.exe.    
+  https://www.computerhope.com/issues/ch000572.htm    
+
+
+- Copy excel files to the same directory with ....rsc.   
+- Click ....rsc.   
+- Then a black command windows will be opened and wait a moment.   
+- At the first time to run ....rsc, browser stars and ask for your ID and password for authorization.   
+- Input ID and password, then you will be authorized.    
+- After authorization, close browser.   
+
+If you want not to send emails but only make draft, 
+
+
+Contents of ....rsc is shown below. 
+
+```{r}
+rsc <- system.file("rsc/....rsc", package = "automater")
+cat(readtext::readtext(rsc, verbosity = 0)$text)
+```

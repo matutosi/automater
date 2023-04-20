@@ -1,7 +1,6 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # See 
-  # 
+  # See https://github.com/matutosi/automater/blob/main/vignettes/NAME.Rmd
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 
@@ -16,15 +15,10 @@ if(! pkg %in% installed.packages()[,1]){
   devtools::install_github("matutosi/automater", force = TRUE)
 }
 
-automater::validate_package("tesseract")
-lng <- "jpn"
-if(! lng %in% tesseract::tesseract_info()$available){
-  tesseract::tesseract_download(lng)
-}
+automater::validate_package("")
 
   # Run
-files <- list.files(pattern = "bmp|gif|png|tif|tiff")
+files <- list.files(pattern = "")
 for(file in files){
-  text <- automater::ocr_tesseract(file)
-  writeLines(text, paste0(file, ".txt"))
+  automater::NAME(file)
 }

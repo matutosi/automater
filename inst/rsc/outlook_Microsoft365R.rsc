@@ -1,6 +1,6 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # See https://github.com/matutosi/automater/blob/main/vignettes/xlsx.Rmd
+  # See https://github.com/matutosi/automater/blob/main/vignettes/outlook_Microsoft365R.Rmd
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 
@@ -15,10 +15,10 @@ if(! pkg %in% installed.packages()[,1]){
   devtools::install_github("matutosi/automater", force = TRUE)
 }
 
-automater::validate_package("xlsx")
+automater::validate_package("Microsoft365R")
 
   # Run
-files <- list.files(pattern = "xls")
-for(file in files){
-  automater::set_af_fp(file)
-}
+outlook <- Microsoft365R::get_business_outlook()
+path <- "outlook.xlsx"
+automater::create_email(path, outlook, send = TRUE)
+

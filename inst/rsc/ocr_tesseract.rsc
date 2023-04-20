@@ -1,7 +1,6 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # How to use ocr.rsc
-  # 
+  # See https://github.com/matutosi/automater/blob/main/vignettes/ocr_tesseract.Rmd
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 

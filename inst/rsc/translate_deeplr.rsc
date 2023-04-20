@@ -1,15 +1,20 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # How to use
+  # See https://github.com/matutosi/automater/blob/main/vignettes/translate_deeplr.Rmd
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
-  # 
+  #  
   # Setting (required)
-  # 
+  #  
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  #  
 api_key <- "set_your_key"
+  #  
+  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+
 
   # Prepare
 pkg <- "devtools"
