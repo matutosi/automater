@@ -1,21 +1,16 @@
 ---
 title: "ocr with tesseract"
 output: rmarkdown::html_vignette
-    keep_md: true
 vignette: >
   %\VignetteIndexEntry{ocr_tesseract}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
-```{r setup, eval = FALSE}
+
+
+```r
 library(automater)
 automater::validate_package("tesseract")
 ```
@@ -23,7 +18,8 @@ automater::validate_package("tesseract")
 
 COR (Optical Character Recognition, extract text from image files) with package tesseract. 
 
-```{r eval = FALSE}
+
+```r
 files <- list.files(pattern = "bmp|gif|png|tif|tiff")
 text <- list()
 for(file in files){
@@ -40,7 +36,8 @@ When image file name is "image.png", text file will be "image.png.txt"
 - Save orc_tesseract.rsc to a directory.    
   You can copy orc_tesseract.rsc by code below.    
 
-```{r eval = FALSE}
+
+```r
 rsc <- system.file("rsc/orc_tesseract.rsc", package = "automater")
 target_dir <- "c:/" # set your directory
 file.copy(rsc, target_dir)
@@ -63,7 +60,38 @@ file.copy(rsc, target_dir)
 
 Contents of orc_tesseract.rsc is shown below. 
 
-```{r}
+
+```r
 rsc <- system.file("rsc/ocr_tesseract.rsc", package = "automater")
 cat(readtext::readtext(rsc, verbosity = 0)$text)
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#>   # 
+#>   # How to use ocr.rsc
+#>   # 
+#>   # 
+#>   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+#> 
+#>   # Prepare
+#> pkg <- "devtools"
+#> if(! pkg %in% installed.packages()[,1]){
+#>   install.packages(pkg, repo = "https://cran.ism.ac.jp/")
+#> }
+#> 
+#> pkg <- "automater"
+#> if(! pkg %in% installed.packages()[,1]){
+#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> }
+#> 
+#> automater::validate_package("tesseract")
+#> lng <- "jpn"
+#> if(! lng %in% tesseract::tesseract_info()$available){
+#>   tesseract::tesseract_download(lng)
+#> }
+#> 
+#>   # Run
+#> files <- list.files(pattern = "bmp|gif|png|tif|tiff")
+#> for(file in files){
+#>   text <- automater::ocr_tesseract(file)
+#>   writeLines(text, paste0(file, ".txt"))
+#> }
 ```
