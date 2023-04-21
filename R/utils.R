@@ -36,7 +36,8 @@ file_split_name <- function(file){
 #' Add numbers to file name. 
 #' 
 #' @param   file    A string of file name.
-#' @param   n       A integer.
+#' @param   n,extra An integer.
+#' @param   sep     A string of separater between file name and number. 
 #' @return  String vector of nubered file name.
 #' @examples
 #' file <- "aaa.body.ext"

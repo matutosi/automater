@@ -9,7 +9,9 @@ file_numbered(file, n, extra = 0, sep = "_")
 \arguments{
 \item{file}{A string of file name.}
 
-\item{n}{A integer.}
+\item{n, extra}{An integer.}
+
+\item{sep}{A string of separater between file name and number.}
 }
 \value{
 String vector of nubered file name.
