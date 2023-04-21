@@ -1,6 +1,6 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # See https://github.com/matutosi/automater/blob/main/vignettes/translate_deeplr.Rmd
+  # See https://github.com/matutosi/automater/blob/main/vignettes/translate_deeplr.md
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 

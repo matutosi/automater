@@ -1,6 +1,6 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # See https://github.com/matutosi/automater/blob/main/vignettes/ocr_tesseract.Rmd
+  # See https://github.com/matutosi/automater/blob/main/vignettes/ocr_tesseract.md
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 

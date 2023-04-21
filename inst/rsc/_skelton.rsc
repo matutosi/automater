@@ -1,6 +1,6 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # See https://github.com/matutosi/automater/blob/main/vignettes/NAME.Rmd
+  # See https://github.com/matutosi/automater/blob/main/vignettes/NAME.md
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 

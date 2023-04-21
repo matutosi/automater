@@ -1,6 +1,6 @@
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
   # 
-  # See https://github.com/matutosi/automater/blob/main/vignettes/xlsx.Rmd
+  # See https://github.com/matutosi/automater/blob/main/vignettes/xlsx.md
   # 
   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 
