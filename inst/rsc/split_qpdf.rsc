@@ -21,19 +21,14 @@ automater::validate_package("stringr")
   # Run
 files <- list.files(pattern = "\\.pdf")
 for(file in files){
-  n_page <- qpdf::pdf_length(file)
   output <- qpdf::pdf_split(file)
-  numbered <- automater::file_numbered(file, n_page)
-  regrep_numbered <- stringr::str_c(numbered, collapse = "|")
-  extra <- 0
-  # to avoid dupulicated file name, add extra degits
-  while(0 != sum(stringr::str_detect(files, regrep_numbered))){
+  n_page <- qpdf::pdf_length(file)
+  extra <- 0  # to avoid dupulicated file name, add extra degits
+  numbered <- automater::file_numbered(file, n_page, extra = extra)
+  while(is_duplicated(files, numbered)){
     extra <- extra + 1
     numbered <- automater::file_numbered(file, n_page, extra = extra)
-    regrep_numbered <- stringr::str_c(numbered, collapse = "|")
   }
   file.rename(output, numbered)
 }
 
-  # qpdf::pdf_combine(out, "out.pdf")
-  # qpdf::pdf_split(input)

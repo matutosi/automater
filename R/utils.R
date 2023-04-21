@@ -52,3 +52,21 @@ file_numbered <- function(file, n , extra = 0, sep = "_"){
   return(files)
 }
 
+#' Add numbers to file name. 
+#' @param  x,y    A string vector. 
+#' 
+#' @return  A logical.
+#' @examples
+#' x <- letters[1:5]
+#' y <- letters[5:8]
+#' z <- letters[6:8]
+#' is_duplicated(x, y)
+#' is_duplicated(x, z)
+#' is_duplicated(y, z)
+#' 
+#' @export
+is_duplicated <- function(x, y){
+  regrep <- stringr::str_c(y, collapse = "|")
+  n_dup <- sum(stringr::str_detect(x, regrep))
+  return(as.logical(n_dup))
+}
