@@ -1,0 +1,1 @@
+Rscript translate_deeplr.rsc
