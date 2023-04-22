@@ -25,7 +25,7 @@ for(file in files){
   n_page <- qpdf::pdf_length(file)
   extra <- 0  # to avoid dupulicated file name, add extra degits
   numbered <- automater::file_numbered(file, n_page, extra = extra)
-  while(is_duplicated(files, numbered)){
+  while(automater::is_duplicated(files, numbered)){
     extra <- extra + 1
     numbered <- automater::file_numbered(file, n_page, extra = extra)
   }

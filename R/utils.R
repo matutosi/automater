@@ -71,3 +71,14 @@ is_duplicated <- function(x, y){
   n_dup <- sum(stringr::str_detect(x, regrep))
   return(as.logical(n_dup))
 }
+
+#' Desplay message to continue
+#' @example
+#' autonater::message_to_continue()
+#' 
+#' @export
+message_to_continue <- function(){
+  print("Press [Enter] key to continue ...")
+  scan("stdin", character(), nlines = 1)
+}
+                                              
