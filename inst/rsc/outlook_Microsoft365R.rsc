@@ -22,3 +22,5 @@ outlook <- Microsoft365R::get_business_outlook()
 path <- "d:/outlook_Microsoft365R.xlsx"
 automater::create_email(path, outlook, send = TRUE)
 
+message_to_continue()
+

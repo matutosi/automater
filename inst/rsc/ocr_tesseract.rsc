@@ -27,3 +27,6 @@ for(file in files){
   text <- automater::ocr_tesseract(file)
   writeLines(text, paste0(file, ".txt"))
 }
+
+message_to_continue()
+

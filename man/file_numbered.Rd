@@ -11,10 +11,10 @@ file_numbered(file, n, extra = 0, sep = "_")
 
 \item{n, extra}{An integer.}
 
-\item{sep}{A string of separater between file name and number.}
+\item{sep}{A string of separator between file name and number.}
 }
 \value{
-String vector of nubered file name.
+String vector of numbered file name.
 }
 \description{
 Add numbers to file name.

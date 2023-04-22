@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{file_split_name}
 \alias{file_split_name}
-\title{Split file name into body part and extention.}
+\title{Split file name into body part and extension.}
 \usage{
 file_split_name(file)
 }
@@ -10,10 +10,10 @@ file_split_name(file)
 \item{file}{A string of file name.}
 }
 \value{
-A list including file name of body part and extention.
+A list including file name of body part and extension.
 }
 \description{
-Split file name into body part and extention.
+Split file name into body part and extension.
 }
 \examples{
 file <- "aaa.body.ext"

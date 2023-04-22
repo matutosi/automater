@@ -23,3 +23,5 @@ files <- sort(list.files(pattern = "\\.pdf"))
 output <- paste0("combined_", Sys.Date(), "_", format(Sys.time(), "%H_%M_%S"), ".pdf")
 qpdf::pdf_combine(files, output)
 
+message_to_continue()
+

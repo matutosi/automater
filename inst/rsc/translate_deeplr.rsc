@@ -39,3 +39,5 @@ for(file in files){
   utils::write.table(txt, paste0("translated_", file), quote = FALSE, sep = "\t", row.names = FALSE)
 }
 
+message_to_continue()
+

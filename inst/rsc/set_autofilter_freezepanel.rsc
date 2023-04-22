@@ -22,3 +22,6 @@ files <- list.files(pattern = "xls")
 for(file in files){
   automater::set_af_fp(file)
 }
+
+message_to_continue()
+

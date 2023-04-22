@@ -22,3 +22,6 @@ files <- list.files(pattern = "")
 for(file in files){
   automater::NAME(file)
 }
+
+message_to_continue()
+

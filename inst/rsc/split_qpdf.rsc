@@ -32,3 +32,5 @@ for(file in files){
   file.rename(output, numbered)
 }
 
+message_to_continue()
+

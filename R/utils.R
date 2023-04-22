@@ -16,10 +16,10 @@ validate_package <- function(pkg, repos = "https://cran.ism.ac.jp/"){
   }
 }
 
-#' Split file name into body part and extention.
+#' Split file name into body part and extension.
 #' 
 #' @param   file     A string of file name.
-#' @return  A list including file name of body part and extention.
+#' @return  A list including file name of body part and extension.
 #' @examples
 #' file <- "aaa.body.ext"
 #' file_split_name(file)
@@ -37,8 +37,8 @@ file_split_name <- function(file){
 #' 
 #' @param   file    A string of file name.
 #' @param   n,extra An integer.
-#' @param   sep     A string of separater between file name and number. 
-#' @return  String vector of nubered file name.
+#' @param   sep     A string of separator between file name and number. 
+#' @return  String vector of numbered file name.
 #' @examples
 #' file <- "aaa.body.ext"
 #' file_numbered(file, 30)
@@ -72,9 +72,7 @@ is_duplicated <- function(x, y){
   return(as.logical(n_dup))
 }
 
-#' Desplay message to continue
-#' @example
-#' autonater::message_to_continue()
+#' Display message to continue
 #' 
 #' @export
 message_to_continue <- function(){
