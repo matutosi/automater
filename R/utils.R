@@ -79,4 +79,26 @@ message_to_continue <- function(){
   print("Press [Enter] key to continue ...")
   scan("stdin", character(), nlines = 1)
 }
-                                              
+
+#' Copy *.rsc (and *.command, and chmod on Mac)
+#' @param  file,path   A string of file and path
+#' 
+#' @export
+set_rsc <- function(file, path){
+  file <- paste0(file, if(get_os() == "win"){ ".rsc" } else{ c(".rsc", ".command") })
+  rsc <- system.file(file.path("rsc", file), package = "automater")
+  file.copy(rsc, path, overwrite = TRUE)
+  Sys.chmod(file.path(dir, file[2]), "755")
+}
+
+#' Get os name
+#' 
+#' @export
+get_os <- function(){
+  switch(Sys.info()["sysname"],
+    "Windows" = "win",
+     "Linux"  = "linux",
+                "mac"
+  )
+}
+
