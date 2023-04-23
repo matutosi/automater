@@ -19,8 +19,8 @@ automater::validate_package("Microsoft365R")
 
   # Run
 outlook <- Microsoft365R::get_business_outlook()
-path <- "d:/outlook_Microsoft365R.xlsx"
-automater::create_email(path, outlook, send = TRUE)
+path <- "outlook_Microsoft365R.xlsx"
+automater::create_email(path, outlook)
 
 message_to_continue()
 

@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^data-raw$
+^tools$
 ^README\.Rmd$
 ^R\_skeleton.R$
 ^rsc\_skelton.rsc$

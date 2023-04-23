@@ -4,14 +4,15 @@
 #' 
 #' @name outlook
 #' @param path      A string of path for MS excel that include columns of email: 
-#'                  "to" (required), 
-#'                  "subject" (almost required), "body" (almost required), 
-#'                  "cc" (optional), "bcc" (optional), 
+#'                  "send" (required), 
+#'                      1: send, 0: save in drafts.
+#'                  "to" (required).
+#'                  "subject" (almost required), "body" (almost required).
+#'                  "cc" (optional), "bcc" (optional).
 #'                  "attachment" (optional).
-#'                  "attachment" is path to files separated with comma (","). 
+#'                      "attachment" is path to files separated with comma (","). 
 #' @param df        A dataframe including contents of emails. 
 #' @param outlook   ms_outlook_object generated with get_business_outlook().
-#' @param send      A logical. TRUE: send emails, FALSE: save as drafts.
 #' @param emails    A list of ms_outlook_email class.
 #' @return  A list of ms_outlook_email class.
 #' 
@@ -19,18 +20,20 @@
 #' \dontrun{
 #' outlook <- Microsoft365R::get_business_outlook()
 #' path <- "outlook_Microsoft365R.xlsx"
-#' create_email(path, outlook, send = TRUE)
+#' create_email(path, outlook)
 #' }
 #' 
 #' @export
-create_email <- function(path, outlook, send = TRUE){
+create_email <- function(path, outlook){
   df <- readxl::read_xlsx(path)
   emails <- gen_email(outlook, df)
   if("attachment" %in% colnames(df)){
     emails <- add_attachment(emails, df)
   }
-  if(send){
-    send_email(emails)
+  for(i in seq_along(nrow(df))){
+    if(send$send[i] == 1){
+      send_email(emails[i])
+    }
   }
   return(emails)
 }
