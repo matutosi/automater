@@ -377,32 +377,37 @@ text files, use translate_deeplr.rsc in rsc directory within automater
 package. When input file name is “neko.txt”, output file will be
 “translated_neko.txt”</p>
 <ul>
-<li>Save translate_deeplr.rsc to a directory.<br />
-You can copy translate_deeplr.rsc by code below.</li>
+<li>Save deepl_api.rsc (and deepl_api.command, then chmod
+deepl_api.command “755” on Mac) to a directory.<br />
+You can set deepl_api.rsc (and deepl_api.command on Mac) by code
+below.</li>
 </ul>
-<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/translate_deeplr.rsc&quot;, package = &quot;automater&quot;)
-target_dir &lt;- &quot;c:/&quot; # set your directory
-file.copy(rsc, target_dir)</code></pre>
+<pre class="r"><code>file &lt;- &quot;deepl_api&quot;
+path &lt;- &quot;c:/&quot; # set your path
+automater::set_rsc(file, path)</code></pre>
 <ul>
-<li>Associate extension .rsc with Rscript.exe.<br />
-<a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a><br />
-</li>
-<li>Set your deepl api key in translate_deeplr.rsc (required).<br />
+<li><p>On Windows Associate extension .rsc with Rscript.exe.<br />
+<a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></p></li>
+<li><p>Set your deepl api key in translate_deeplr.rsc (required).<br />
 api_key &lt;- “set_your_key”<br />
-</li>
-<li>Copy text files (*.txt) to the same directory with
+</p></li>
+<li><p>Copy text files (*.txt) to the same directory with
 translate_deeplr.rsc.<br />
-</li>
-<li>Click translate_deeplr.rsc.<br />
-</li>
-<li>Then a black command windows will be opened and wait a moment.</li>
+</p></li>
+<li><p>Click deepl_api.rsc on Windows (deepl_api.command on Mac).<br />
+</p></li>
+<li><p>Then a black command windows will be opened and wait a
+moment.<br />
+</p></li>
+<li><p>At the first time to run deepl_api.rsc, it may take few minutes
+to install packages.</p></li>
 </ul>
 <p>Contents of translate_deeplr.rsc is shown below.</p>
 <pre class="r"><code>rsc &lt;- system.file(&quot;rsc/translate_deeplr.rsc&quot;, package = &quot;automater&quot;)
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt;   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #&gt;   # 
-#&gt;   # See https://github.com/matutosi/automater/blob/main/vignettes/translate_deeplr.Rmd
+#&gt;   # See https://github.com/matutosi/automater/blob/main/vignettes/translate_deeplr.md
 #&gt;   # 
 #&gt;   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #&gt; 

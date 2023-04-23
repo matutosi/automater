@@ -359,21 +359,24 @@ automater::validate_package(&quot;qpdf&quot;)</code></pre>
 function combine several pdf files into one.</p>
 <pre class="r"><code>files &lt;- c(&quot;a.pdf&quot;, &quot;b.pdf&quot;, &quot;c.pdf&quot;)
 qpdf::pdf_combine(files)</code></pre>
-<p>To run qpdf::pdf_combine() automatically, use combine_qpdf.rsc in rsc
-directory within automater package.</p>
+<p>To run () automatically, use combine_qpdf.rsc in rsc directory within
+automater package.</p>
 <ul>
-<li>Save combine_qpdf.rsc to a directory.<br />
-You can copy combine_qpdf.rsc by code below.</li>
+<li>Save combine_qpdf.rsc (and combine_qpdf.command, then chmod
+combine_qpdf.command “755” on Mac) to a directory.<br />
+You can set combine_qpdf.rsc (and combine_qpdf.command on Mac) by code
+below.</li>
 </ul>
-<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/combine_qpdf.rsc&quot;, package = &quot;automater&quot;)
-target_dir &lt;- &quot;c:/&quot; # set your directory
-file.copy(rsc, target_dir)</code></pre>
+<pre class="r"><code>file &lt;- &quot;combine_qpdf&quot;
+path &lt;- &quot;c:/&quot; # set your path
+automater::set_rsc(file, path)</code></pre>
 <ul>
-<li><p>Associate extension .rsc with Rscript.exe.<br />
+<li><p>On Windows Associate extension .rsc with Rscript.exe.<br />
 <a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></p></li>
 <li><p>Copy PDF files to the same directory with combine_qpdf.rsc.<br />
 </p></li>
-<li><p>Click combine_qpdf.rsc.<br />
+<li><p>Click combine_qpdf.rsc on Windows (combine_qpdf.command on
+Mac).<br />
 </p></li>
 <li><p>Then a black command windows will be opened and wait a
 moment.<br />

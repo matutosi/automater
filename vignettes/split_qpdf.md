@@ -27,24 +27,24 @@ This function split a single pdf file into separate files, one for each page.
 qpdf::pdf_split("a.pdf")
 ```
 
-To run qpdf::pdf_split() automatically, use split_qpdf.rsc in rsc directory within automater package.
+To run () automatically, use split_qpdf.rsc in rsc directory within automater package.   
 
-- Save split_qpdf.rsc to a directory.    
-  You can copy split_qpdf.rsc by code below.    
+- Save split_qpdf.rsc (and split_qpdf.command, then chmod split_qpdf.command "755" on Mac) to a directory.    
+  You can set split_qpdf.rsc (and split_qpdf.command on Mac) by code below.    
 
 
 ```r
-rsc <- system.file("rsc/split_qpdf.rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "split_qpdf"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
 
 - Copy PDF files to the same directory with split_qpdf.rsc.   
-- Click split_qpdf.rsc.   
+- Click split_qpdf.rsc on Windows (split_qpdf.command on Mac).   
 - Then a black command windows will be opened and wait a moment.   
 - At the first time to run split_qpdf.rsc, it may take few minutes to install packages.   
 - The output file is like as below.    
@@ -80,20 +80,14 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #>   # Run
 #> files <- list.files(pattern = "\\.pdf")
 #> for(file in files){
-#>   n_page <- qpdf::pdf_length(file)
 #>   output <- qpdf::pdf_split(file)
-#>   numbered <- automater::file_numbered(file, n_page)
-#>   regrep_numbered <- stringr::str_c(numbered, collapse = "|")
-#>   extra <- 0
-#>   # to avoid dupulicated file name, add extra degits
-#>   while(0 != sum(stringr::str_detect(files, regrep_numbered))){
+#>   n_page <- qpdf::pdf_length(file)
+#>   extra <- 0  # to avoid dupulicated file name, add extra degits
+#>   numbered <- automater::file_numbered(file, n_page, extra = extra)
+#>   while(is_duplicated(files, numbered)){
 #>     extra <- extra + 1
 #>     numbered <- automater::file_numbered(file, n_page, extra = extra)
-#>     regrep_numbered <- stringr::str_c(numbered, collapse = "|")
 #>   }
 #>   file.rename(output, numbered)
 #> }
-#> 
-#>   # qpdf::pdf_combine(out, "out.pdf")
-#>   # qpdf::pdf_split(input)
 ```

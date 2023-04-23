@@ -30,23 +30,23 @@ This function split a single pdf file into separate files, one for each page.
 qpdf::pdf_split("a.pdf")
 ```
 
-To run qpdf::pdf_split() automatically, use split_qpdf.rsc in rsc directory within automater package.
+To run () automatically, use split_qpdf.rsc in rsc directory within automater package.   
 
-- Save split_qpdf.rsc to a directory.    
-  You can copy split_qpdf.rsc by code below.    
+- Save split_qpdf.rsc (and split_qpdf.command, then chmod split_qpdf.command "755" on Mac) to a directory.    
+  You can set split_qpdf.rsc (and split_qpdf.command on Mac) by code below.    
 
 ```{r eval = FALSE}
-rsc <- system.file("rsc/split_qpdf.rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "split_qpdf"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
 
 - Copy PDF files to the same directory with split_qpdf.rsc.   
-- Click split_qpdf.rsc.   
+- Click split_qpdf.rsc on Windows (split_qpdf.command on Mac).   
 - Then a black command windows will be opened and wait a moment.   
 - At the first time to run split_qpdf.rsc, it may take few minutes to install packages.   
 - The output file is like as below.    

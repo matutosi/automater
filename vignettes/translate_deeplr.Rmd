@@ -54,22 +54,25 @@ To run automater::deepl_api() automatically and save contents into text files,
 use translate_deeplr.rsc in rsc directory within automater package.
 When input file name is "neko.txt", output file will be "translated_neko.txt" 
 
-- Save translate_deeplr.rsc to a directory.    
-  You can copy translate_deeplr.rsc by code below.    
+- Save deepl_api.rsc (and deepl_api.command, then chmod deepl_api.command "755" on Mac) to a directory.    
+  You can set deepl_api.rsc (and deepl_api.command on Mac) by code below.    
 
 ```{r eval = FALSE}
-rsc <- system.file("rsc/translate_deeplr.rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "deepl_api"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
+
 - Set your deepl api key in translate_deeplr.rsc (required).    
   api_key <- "set_your_key"   
 - Copy text files (*.txt) to the same directory with translate_deeplr.rsc.   
-- Click translate_deeplr.rsc.   
+- Click deepl_api.rsc on Windows (deepl_api.command on Mac).   
 - Then a black command windows will be opened and wait a moment.   
+- At the first time to run deepl_api.rsc, it may take few minutes to install packages.   
+
 
 Contents of translate_deeplr.rsc is shown below. 
 

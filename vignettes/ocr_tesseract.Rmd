@@ -40,28 +40,22 @@ To run automater::ocr_tesseract() automatically and save contents into text file
 use orc_tesseract.rsc in rsc directory within automater package.
 When image file name is "image.png", text file will be "image.png.txt" 
 
-- Save orc_tesseract.rsc to a directory.    
-  You can copy orc_tesseract.rsc by code below.    
+- Save orc_tesseract.rsc (and orc_tesseract.command, then chmod orc_tesseract.command "755" on Mac) to a directory.    
+  You can set orc_tesseract.rsc (and orc_tesseract.command on Mac) by code below.    
 
 ```{r eval = FALSE}
-rsc <- system.file("rsc/orc_tesseract.rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "orc_tesseract"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
-<!--
-  # assoc .rsc=rscript
-  # ftype rscript="D:\pf\R\R-4.2.3\bin\x64\Rscript.exe" "%1"
-  # file.path(R.home(), "bin", "x64", "Rscript.exe")
-  # assoc .rsc
-  # ftype rscript
--->
 
 - Copy image files (bmp, gif, png, tif, tiff) to the same directory with orc_tesseract.rsc.   
-- Click orc_tesseract.rsc.   
+- Click orc_tesseract.rsc on Windows (orc_tesseract.command on Mac).   
+
 - Then a black command windows will be opened and wait a moment.   
 
 Contents of orc_tesseract.rsc is shown below. 

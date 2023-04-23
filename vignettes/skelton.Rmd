@@ -25,32 +25,34 @@ automater::validate_package("")
 
 ... using () function.
 
+
 ```{r eval = FALSE}
 
 ```
 
-To run () automatically, use ....rsc in rsc directory within automater package.
 
-- Save ....rsc to a directory.    
-  You can copy ....rsc by code below.    
+To run () automatically, use ***.rsc in rsc directory within automater package.   
+
+- Save ***.rsc (and ***.command, then chmod ***.command "755" on Mac) to a directory.    
+  You can set ***.rsc (and ***.command on Mac) by code below.    
 
 ```{r eval = FALSE}
-rsc <- system.file("rsc/....rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "***"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
 
-- Copy *** files to the same directory with ....rsc.   
-- Click ....rsc.   
+- Copy ... files to the same directory with ***.rsc.   
+- Click ***.rsc on Windows (***.command on Mac).   
 - Then a black command windows will be opened and wait a moment.   
-- At the first time to run ....rsc, **********
+- At the first time to run ***.rsc, it may take few minutes to install packages.   
 
 
-Contents of ....rsc is shown below. 
+Contents of ***.rsc is shown below. 
 
 ```{r}
   # rsc <- system.file("rsc/....rsc", package = "automater")

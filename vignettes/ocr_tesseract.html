@@ -368,37 +368,31 @@ into text files, use orc_tesseract.rsc in rsc directory within automater
 package. When image file name is “image.png”, text file will be
 “image.png.txt”</p>
 <ul>
-<li>Save orc_tesseract.rsc to a directory.<br />
-You can copy orc_tesseract.rsc by code below.</li>
+<li>Save orc_tesseract.rsc (and orc_tesseract.command, then chmod
+orc_tesseract.command “755” on Mac) to a directory.<br />
+You can set orc_tesseract.rsc (and orc_tesseract.command on Mac) by code
+below.</li>
 </ul>
-<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/orc_tesseract.rsc&quot;, package = &quot;automater&quot;)
-target_dir &lt;- &quot;c:/&quot; # set your directory
-file.copy(rsc, target_dir)</code></pre>
+<pre class="r"><code>file &lt;- &quot;orc_tesseract&quot;
+path &lt;- &quot;c:/&quot; # set your path
+automater::set_rsc(file, path)</code></pre>
 <ul>
-<li>Associate extension .rsc with Rscript.exe.<br />
-<a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></li>
-</ul>
-<!--
-  # assoc .rsc=rscript
-  # ftype rscript="D:\pf\R\R-4.2.3\bin\x64\Rscript.exe" "%1"
-  # file.path(R.home(), "bin", "x64", "Rscript.exe")
-  # assoc .rsc
-  # ftype rscript
--->
-<ul>
-<li>Copy image files (bmp, gif, png, tif, tiff) to the same directory
+<li><p>On Windows Associate extension .rsc with Rscript.exe.<br />
+<a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></p></li>
+<li><p>Copy image files (bmp, gif, png, tif, tiff) to the same directory
 with orc_tesseract.rsc.<br />
-</li>
-<li>Click orc_tesseract.rsc.<br />
-</li>
-<li>Then a black command windows will be opened and wait a moment.</li>
+</p></li>
+<li><p>Click orc_tesseract.rsc on Windows (orc_tesseract.command on
+Mac).</p></li>
+<li><p>Then a black command windows will be opened and wait a
+moment.</p></li>
 </ul>
 <p>Contents of orc_tesseract.rsc is shown below.</p>
 <pre class="r"><code>rsc &lt;- system.file(&quot;rsc/ocr_tesseract.rsc&quot;, package = &quot;automater&quot;)
 cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt;   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #&gt;   # 
-#&gt;   # See https://github.com/matutosi/automater/blob/main/vignettes/ocr_tesseract.Rmd
+#&gt;   # See https://github.com/matutosi/automater/blob/main/vignettes/ocr_tesseract.md
 #&gt;   # 
 #&gt;   #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
 #&gt; 

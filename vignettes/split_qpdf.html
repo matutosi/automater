@@ -358,21 +358,24 @@ automater::validate_package(&quot;qpdf&quot;)</code></pre>
 <p>Split pdf with qpdf using qpdf::pdf_split() function. This function
 split a single pdf file into separate files, one for each page.</p>
 <pre class="r"><code>qpdf::pdf_split(&quot;a.pdf&quot;)</code></pre>
-<p>To run qpdf::pdf_split() automatically, use split_qpdf.rsc in rsc
-directory within automater package.</p>
+<p>To run () automatically, use split_qpdf.rsc in rsc directory within
+automater package.</p>
 <ul>
-<li>Save split_qpdf.rsc to a directory.<br />
-You can copy split_qpdf.rsc by code below.</li>
+<li>Save split_qpdf.rsc (and split_qpdf.command, then chmod
+split_qpdf.command “755” on Mac) to a directory.<br />
+You can set split_qpdf.rsc (and split_qpdf.command on Mac) by code
+below.</li>
 </ul>
-<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/split_qpdf.rsc&quot;, package = &quot;automater&quot;)
-target_dir &lt;- &quot;c:/&quot; # set your directory
-file.copy(rsc, target_dir)</code></pre>
+<pre class="r"><code>file &lt;- &quot;split_qpdf&quot;
+path &lt;- &quot;c:/&quot; # set your path
+automater::set_rsc(file, path)</code></pre>
 <ul>
-<li><p>Associate extension .rsc with Rscript.exe.<br />
+<li><p>On Windows Associate extension .rsc with Rscript.exe.<br />
 <a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></p></li>
 <li><p>Copy PDF files to the same directory with split_qpdf.rsc.<br />
 </p></li>
-<li><p>Click split_qpdf.rsc.<br />
+<li><p>Click split_qpdf.rsc on Windows (split_qpdf.command on
+Mac).<br />
 </p></li>
 <li><p>Then a black command windows will be opened and wait a
 moment.<br />
@@ -413,22 +416,16 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt;   # Run
 #&gt; files &lt;- list.files(pattern = &quot;\\.pdf&quot;)
 #&gt; for(file in files){
-#&gt;   n_page &lt;- qpdf::pdf_length(file)
 #&gt;   output &lt;- qpdf::pdf_split(file)
-#&gt;   numbered &lt;- automater::file_numbered(file, n_page)
-#&gt;   regrep_numbered &lt;- stringr::str_c(numbered, collapse = &quot;|&quot;)
-#&gt;   extra &lt;- 0
-#&gt;   # to avoid dupulicated file name, add extra degits
-#&gt;   while(0 != sum(stringr::str_detect(files, regrep_numbered))){
+#&gt;   n_page &lt;- qpdf::pdf_length(file)
+#&gt;   extra &lt;- 0  # to avoid dupulicated file name, add extra degits
+#&gt;   numbered &lt;- automater::file_numbered(file, n_page, extra = extra)
+#&gt;   while(is_duplicated(files, numbered)){
 #&gt;     extra &lt;- extra + 1
 #&gt;     numbered &lt;- automater::file_numbered(file, n_page, extra = extra)
-#&gt;     regrep_numbered &lt;- stringr::str_c(numbered, collapse = &quot;|&quot;)
 #&gt;   }
 #&gt;   file.rename(output, numbered)
-#&gt; }
-#&gt; 
-#&gt;   # qpdf::pdf_combine(out, &quot;out.pdf&quot;)
-#&gt;   # qpdf::pdf_split(input)</code></pre>
+#&gt; }</code></pre>
 
 
 

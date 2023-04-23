@@ -24,20 +24,21 @@ Send outlook emails based on the contents of excel file using automater::create_
 
 
 
-To run automater::create_email() automatically, use outlook_Microsoft365.rsc in rsc directory within automater package.
+To run () automatically, use outlook_Microsoft365.rsc in rsc directory within automater package.   
 
-- Save outlook_Microsoft365.rsc to a directory.    
-  You can copy outlook_Microsoft365.rsc by code below.    
+- Save outlook_Microsoft365.rsc (and outlook_Microsoft365.command, then chmod outlook_Microsoft365.command "755" on Mac) to a directory.    
+  You can set outlook_Microsoft365.rsc (and outlook_Microsoft365.command on Mac) by code below.    
 
 
 ```r
-rsc <- system.file("rsc/outlook_Microsoft365.rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "outlook_Microsoft365"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
+
 
 - Copy an excel file (outlook_Microsoft365R.xlsx) to the same directory with outlook_Microsoft365.rsc.   
   The excel file including columns below. 
@@ -47,7 +48,7 @@ file.copy(rsc, target_dir)
   - "cc" (optional)
   - "bcc" (optional)
   - "attachment" (optional): path to files separated with comma (",")
-- Click outlook_Microsoft365.rsc.   
+- Click outlook_Microsoft365.rsc on Windows (outlook_Microsoft365.command on Mac).   
 - Then a black command windows will be opened and wait a moment.   
 - At the first time to run outlook_Microsoft365.rsc, browser stars and ask for your ID and password for authorization.   
 - Input ID and password, then you will be authorized.    

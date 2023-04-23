@@ -33,18 +33,20 @@ for(file in files){
 }
 ```
 
-To run set_af_fp() automatically, use set_autofilter_freezepanel.rsc in rsc directory within automater package.
 
-- Save set_autofilter_freezepanel.rsc to a directory.    
-  You can copy set_autofilter_freezepanel.rsc by code below.    
+To run () automatically, use set_autofilter_freezepanel.rsc in rsc directory within automater package.   
+
+- Save set_autofilter_freezepanel.rsc 
+(and set_autofilter_freezepanel.command, then chmod set_autofilter_freezepanel.command "755" on Mac) to a directory.    
+  You can set set_autofilter_freezepanel.rsc (and set_autofilter_freezepanel.command on Mac) by code below.    
 
 ```{r eval = FALSE}
-rsc <- system.file("rsc/set_autofilter_freezepanel.rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "set_autofilter_freezepanel"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
 <!--

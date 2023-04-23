@@ -357,17 +357,20 @@ display: none;
 automater::validate_package(&quot;Microsoft365R&quot;)</code></pre>
 <p>Send outlook emails based on the contents of excel file using
 automater::create_email() function.</p>
-<p>To run automater::create_email() automatically, use
-outlook_Microsoft365.rsc in rsc directory within automater package.</p>
+<p>To run () automatically, use outlook_Microsoft365.rsc in rsc
+directory within automater package.</p>
 <ul>
-<li>Save outlook_Microsoft365.rsc to a directory.<br />
-You can copy outlook_Microsoft365.rsc by code below.</li>
+<li>Save outlook_Microsoft365.rsc (and outlook_Microsoft365.command,
+then chmod outlook_Microsoft365.command “755” on Mac) to a
+directory.<br />
+You can set outlook_Microsoft365.rsc (and outlook_Microsoft365.command
+on Mac) by code below.</li>
 </ul>
-<pre class="r"><code>rsc &lt;- system.file(&quot;rsc/outlook_Microsoft365.rsc&quot;, package = &quot;automater&quot;)
-target_dir &lt;- &quot;c:/&quot; # set your directory
-file.copy(rsc, target_dir)</code></pre>
+<pre class="r"><code>file &lt;- &quot;outlook_Microsoft365&quot;
+path &lt;- &quot;c:/&quot; # set your path
+automater::set_rsc(file, path)</code></pre>
 <ul>
-<li><p>Associate extension .rsc with Rscript.exe.<br />
+<li><p>On Windows Associate extension .rsc with Rscript.exe.<br />
 <a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></p></li>
 <li><p>Copy an excel file (outlook_Microsoft365R.xlsx) to the same
 directory with outlook_Microsoft365.rsc.<br />
@@ -381,7 +384,8 @@ The excel file including columns below.</p>
 <li>“attachment” (optional): path to files separated with comma
 (“,”)</li>
 </ul></li>
-<li><p>Click outlook_Microsoft365.rsc.<br />
+<li><p>Click outlook_Microsoft365.rsc on Windows
+(outlook_Microsoft365.command on Mac).<br />
 </p></li>
 <li><p>Then a black command windows will be opened and wait a
 moment.<br />

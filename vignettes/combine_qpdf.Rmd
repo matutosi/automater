@@ -32,23 +32,23 @@ files <- c("a.pdf", "b.pdf", "c.pdf")
 qpdf::pdf_combine(files)
 ```
 
-To run qpdf::pdf_combine() automatically, use combine_qpdf.rsc in rsc directory within automater package.
+To run () automatically, use combine_qpdf.rsc in rsc directory within automater package.   
 
-- Save combine_qpdf.rsc to a directory.    
-  You can copy combine_qpdf.rsc by code below.    
+- Save combine_qpdf.rsc (and combine_qpdf.command, then chmod combine_qpdf.command "755" on Mac) to a directory.    
+  You can set combine_qpdf.rsc (and combine_qpdf.command on Mac) by code below.    
 
 ```{r eval = FALSE}
-rsc <- system.file("rsc/combine_qpdf.rsc", package = "automater")
-target_dir <- "c:/" # set your directory
-file.copy(rsc, target_dir)
+file <- "combine_qpdf"
+path <- "c:/" # set your path
+automater::set_rsc(file, path)
 ```
 
-- Associate extension .rsc with Rscript.exe.    
+- On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
 
 - Copy PDF files to the same directory with combine_qpdf.rsc.   
-- Click combine_qpdf.rsc.   
+- Click combine_qpdf.rsc on Windows (combine_qpdf.command on Mac).   
 - Then a black command windows will be opened and wait a moment.   
 - At the first time to run combine_qpdf.rsc, it may take few minutes to install packages.   
 - The order to combined files is the same with the order of the file names.    
