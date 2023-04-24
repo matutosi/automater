@@ -29,8 +29,8 @@ qpdf::pdf_split("a.pdf")
 
 To run () automatically, use split_qpdf.rsc in rsc directory within automater package.   
 
-- Save split_qpdf.rsc (and split_qpdf.command, then chmod split_qpdf.command "755" on Mac) to a directory.    
-  You can set split_qpdf.rsc (and split_qpdf.command on Mac) by code below.    
+- Save split_qpdf.rsc to a directory.    
+  You can set split_qpdf.rsc by code below.    
 
 
 ```r
@@ -44,8 +44,8 @@ automater::set_rsc(file, path)
 
 
 - Copy PDF files to the same directory with split_qpdf.rsc.   
-- Click split_qpdf.rsc on Windows (split_qpdf.command on Mac).   
-- Then a black command windows will be opened and wait a moment.   
+- Click split_qpdf.rsc.   
+- Then a black command window will be opened and wait a moment.   
 - At the first time to run split_qpdf.rsc, it may take few minutes to install packages.   
 - The output file is like as below.    
   - input: "original.pdf" (including 15 pages)
@@ -70,8 +70,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> }
 #> 
 #> pkg <- "automater"
-#> if(! pkg %in% installed.packages()[,1]){
-#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> ver <- utils::packageDescription(pkg, fields = "Version")
+#> if(utils::compareVersion(ver, "0.2.0") < 0){
+#>   devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 #> }
 #> 
 #> automater::validate_package("qpdf")
@@ -84,10 +85,12 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #>   n_page <- qpdf::pdf_length(file)
 #>   extra <- 0  # to avoid dupulicated file name, add extra degits
 #>   numbered <- automater::file_numbered(file, n_page, extra = extra)
-#>   while(is_duplicated(files, numbered)){
+#>   while(automater::is_duplicated(files, numbered)){
 #>     extra <- extra + 1
 #>     numbered <- automater::file_numbered(file, n_page, extra = extra)
 #>   }
 #>   file.rename(output, numbered)
 #> }
+#> 
+#> automater::message_to_continue()
 ```

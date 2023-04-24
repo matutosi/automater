@@ -372,15 +372,13 @@ for(file in files){
   txt &lt;- dplyr::mutate(txt, `:=`(&quot;jp&quot;, deepl_api(str = en, api_key = api_key)))
   utils::write.table(txt, paste0(&quot;translated_&quot;, file), quote = FALSE, sep = &quot;\t&quot;, row.names = FALSE)
 }</code></pre>
-<p>To run automater::deepl_api() automatically and save contents into
-text files, use translate_deeplr.rsc in rsc directory within automater
-package. When input file name is “neko.txt”, output file will be
-“translated_neko.txt”</p>
+<p>On Windows, To run automater::deepl_api() automatically and save
+contents into text files, use translate_deeplr.rsc in rsc directory
+within automater package. When input file name is “neko.txt”, output
+file will be “translated_neko.txt”</p>
 <ul>
-<li>Save deepl_api.rsc (and deepl_api.command, then chmod
-deepl_api.command “755” on Mac) to a directory.<br />
-You can set deepl_api.rsc (and deepl_api.command on Mac) by code
-below.</li>
+<li>Save deepl_api.rsc to a directory.<br />
+You can set deepl_api.rsc by code below.</li>
 </ul>
 <pre class="r"><code>file &lt;- &quot;deepl_api&quot;
 path &lt;- &quot;c:/&quot; # set your path
@@ -394,9 +392,9 @@ api_key &lt;- “set_your_key”<br />
 <li><p>Copy text files (*.txt) to the same directory with
 translate_deeplr.rsc.<br />
 </p></li>
-<li><p>Click deepl_api.rsc on Windows (deepl_api.command on Mac).<br />
+<li><p>Click deepl_api.rsc.<br />
 </p></li>
-<li><p>Then a black command windows will be opened and wait a
+<li><p>Then a black command window will be opened and wait a
 moment.<br />
 </p></li>
 <li><p>At the first time to run deepl_api.rsc, it may take few minutes
@@ -430,8 +428,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt; }
 #&gt; 
 #&gt; pkg &lt;- &quot;automater&quot;
-#&gt; if(! pkg %in% installed.packages()[,1]){
-#&gt;   devtools::install_github(&quot;matutosi/automater&quot;, force = TRUE)
+#&gt; ver &lt;- utils::packageDescription(pkg, fields = &quot;Version&quot;)
+#&gt; if(utils::compareVersion(ver, &quot;0.2.0&quot;) &lt; 0){
+#&gt;   devtools::install_github(&quot;matutosi/automater&quot;, upgrade = &quot;never&quot;, force = TRUE)
 #&gt; }
 #&gt; 
 #&gt; automater::validate_package(&quot;deeplr&quot;)
@@ -444,7 +443,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt;   txt &lt;- utils::read.table(file, sep = &quot;\t&quot;, col.names = &quot;en&quot;)
 #&gt;   txt &lt;- dplyr::mutate(txt, `:=`(&quot;jp&quot;, deepl_api(str = en, api_key = api_key)))
 #&gt;   utils::write.table(txt, paste0(&quot;translated_&quot;, file), quote = FALSE, sep = &quot;\t&quot;, row.names = FALSE)
-#&gt; }</code></pre>
+#&gt; }
+#&gt; 
+#&gt; automater::message_to_continue()</code></pre>
 
 
 

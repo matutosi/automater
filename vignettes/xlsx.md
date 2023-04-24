@@ -33,9 +33,8 @@ for(file in files){
 
 To run () automatically, use set_autofilter_freezepanel.rsc in rsc directory within automater package.   
 
-- Save set_autofilter_freezepanel.rsc 
-(and set_autofilter_freezepanel.command, then chmod set_autofilter_freezepanel.command "755" on Mac) to a directory.    
-  You can set set_autofilter_freezepanel.rsc (and set_autofilter_freezepanel.command on Mac) by code below.    
+- Save set_autofilter_freezepanel.rsc to a directory.    
+  You can set set_autofilter_freezepanel.rsc by code below.    
 
 
 ```r
@@ -47,13 +46,6 @@ automater::set_rsc(file, path)
 - On Windows Associate extension .rsc with Rscript.exe.    
   https://www.computerhope.com/issues/ch000572.htm    
 
-<!--
-  # assoc .rsc=rscript
-  # ftype rscript="D:\pf\R\R-4.2.3\bin\x64\Rscript.exe" "%1"
-  # file.path(R.home(), "bin", "x64", "Rscript.exe")
-  # assoc .rsc
-  # ftype rscript
--->
 
 - Copy excel files to the same directory with set_autofilter_freezepanel.rsc.   
 - Click set_autofilter_freezepanel.rsc.   
@@ -78,8 +70,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> }
 #> 
 #> pkg <- "automater"
-#> if(! pkg %in% installed.packages()[,1]){
-#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> ver <- utils::packageDescription(pkg, fields = "Version")
+#> if(utils::compareVersion(ver, "0.2.0") < 0){
+#>   devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 #> }
 #> 
 #> automater::validate_package("xlsx")
@@ -89,4 +82,6 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> for(file in files){
 #>   automater::set_af_fp(file)
 #> }
+#> 
+#> automater::message_to_continue()
 ```

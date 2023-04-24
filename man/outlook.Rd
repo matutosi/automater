@@ -8,7 +8,7 @@
 \alias{add_attachment}
 \title{Wrapper function to create and send outlook emails based on the contents of excel file using package Microsoft365R.}
 \usage{
-create_email(path, outlook, send = TRUE)
+create_email(path, outlook)
 
 gen_email(outlook, df)
 
@@ -18,15 +18,15 @@ add_attachment(emails, df)
 }
 \arguments{
 \item{path}{A string of path for MS excel that include columns of email:
-"to" (required),
-"subject" (almost required), "body" (almost required),
-"cc" (optional), "bcc" (optional),
+"send" (required),
+1: send, 0: save in drafts.
+"to" (required).
+"subject" (almost required), "body" (almost required).
+"cc" (optional), "bcc" (optional).
 "attachment" (optional).
 "attachment" is path to files separated with comma (",").}
 
 \item{outlook}{ms_outlook_object generated with get_business_outlook().}
-
-\item{send}{A logical. TRUE: send emails, FALSE: save as drafts.}
 
 \item{df}{A dataframe including contents of emails.}
 
@@ -42,7 +42,7 @@ Package Microsoft365R \url{https://cran.r-project.org/web/packages/Microsoft365R
 \dontrun{
 outlook <- Microsoft365R::get_business_outlook()
 path <- "outlook_Microsoft365R.xlsx"
-create_email(path, outlook, send = TRUE)
+create_email(path, outlook)
 }
 
 }

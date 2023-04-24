@@ -37,8 +37,8 @@ To run automater::ocr_tesseract() automatically and save contents into text file
 use orc_tesseract.rsc in rsc directory within automater package.
 When image file name is "image.png", text file will be "image.png.txt" 
 
-- Save orc_tesseract.rsc (and orc_tesseract.command, then chmod orc_tesseract.command "755" on Mac) to a directory.    
-  You can set orc_tesseract.rsc (and orc_tesseract.command on Mac) by code below.    
+- Save orc_tesseract.rsc to a directory.    
+  You can set orc_tesseract.rsc by code below.    
 
 
 ```r
@@ -52,9 +52,9 @@ automater::set_rsc(file, path)
 
 
 - Copy image files (bmp, gif, png, tif, tiff) to the same directory with orc_tesseract.rsc.   
-- Click orc_tesseract.rsc on Windows (orc_tesseract.command on Mac).   
+- Click orc_tesseract.rsc.   
 
-- Then a black command windows will be opened and wait a moment.   
+- Then a black command window will be opened and wait a moment.   
 
 Contents of orc_tesseract.rsc is shown below. 
 
@@ -75,8 +75,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> }
 #> 
 #> pkg <- "automater"
-#> if(! pkg %in% installed.packages()[,1]){
-#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> ver <- utils::packageDescription(pkg, fields = "Version")
+#> if(utils::compareVersion(ver, "0.2.0") < 0){
+#>   devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 #> }
 #> 
 #> automater::validate_package("tesseract")
@@ -91,4 +92,6 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #>   text <- automater::ocr_tesseract(file)
 #>   writeLines(text, paste0(file, ".txt"))
 #> }
+#> 
+#> automater::message_to_continue()
 ```

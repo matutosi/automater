@@ -26,8 +26,8 @@ Send outlook emails based on the contents of excel file using automater::create_
 
 To run () automatically, use outlook_Microsoft365.rsc in rsc directory within automater package.   
 
-- Save outlook_Microsoft365.rsc (and outlook_Microsoft365.command, then chmod outlook_Microsoft365.command "755" on Mac) to a directory.    
-  You can set outlook_Microsoft365.rsc (and outlook_Microsoft365.command on Mac) by code below.    
+- Save outlook_Microsoft365.rsc to a directory.    
+  You can set outlook_Microsoft365.rsc by code below.    
 
 
 ```r
@@ -42,14 +42,15 @@ automater::set_rsc(file, path)
 
 - Copy an excel file (outlook_Microsoft365R.xlsx) to the same directory with outlook_Microsoft365.rsc.   
   The excel file including columns below. 
-  - "to" (required), 
+  - "send" (required). 1: send an email, 0: save an email in drafts.
+  - "to" (required)
   - "subject" (almost required)
   - "body" (almost required)
   - "cc" (optional)
   - "bcc" (optional)
   - "attachment" (optional): path to files separated with comma (",")
-- Click outlook_Microsoft365.rsc on Windows (outlook_Microsoft365.command on Mac).   
-- Then a black command windows will be opened and wait a moment.   
+- Click outlook_Microsoft365.rsc.   
+- Then a black command window will be opened and wait a moment.   
 - At the first time to run outlook_Microsoft365.rsc, browser stars and ask for your ID and password for authorization.   
 - Input ID and password, then you will be authorized.    
 - After authorization, close browser.   
@@ -82,8 +83,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> }
 #> 
 #> pkg <- "automater"
-#> if(! pkg %in% installed.packages()[,1]){
-#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> ver <- utils::packageDescription(pkg, fields = "Version")
+#> if(utils::compareVersion(ver, "0.2.0") < 0){
+#>   devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 #> }
 #> 
 #> automater::validate_package("Microsoft365R")
@@ -91,5 +93,7 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #>   # Run
 #> outlook <- Microsoft365R::get_business_outlook()
 #> path <- "d:/outlook_Microsoft365R.xlsx"
-#> automater::create_email(path, outlook, send = TRUE)
+#> create_email(path, outlook)
+#> 
+#> automater::message_to_continue()
 ```

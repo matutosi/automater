@@ -33,8 +33,8 @@ automater::validate_package("")
 
 To run () automatically, use ***.rsc in rsc directory within automater package.   
 
-- Save ***.rsc (and ***.command, then chmod ***.command "755" on Mac) to a directory.    
-  You can set ***.rsc (and ***.command on Mac) by code below.    
+- Save ***.rsc to a directory.    
+  You can set ***.rsc by code below.    
 
 ```{r eval = FALSE}
 file <- "***"
@@ -47,8 +47,8 @@ automater::set_rsc(file, path)
 
 
 - Copy ... files to the same directory with ***.rsc.   
-- Click ***.rsc on Windows (***.command on Mac).   
-- Then a black command windows will be opened and wait a moment.   
+- Click ***.rsc.   
+- Then a black command window will be opened and wait a moment.   
 - At the first time to run ***.rsc, it may take few minutes to install packages.   
 
 

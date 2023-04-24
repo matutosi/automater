@@ -31,8 +31,8 @@ qpdf::pdf_combine(files)
 
 To run () automatically, use combine_qpdf.rsc in rsc directory within automater package.   
 
-- Save combine_qpdf.rsc (and combine_qpdf.command, then chmod combine_qpdf.command "755" on Mac) to a directory.    
-  You can set combine_qpdf.rsc (and combine_qpdf.command on Mac) by code below.    
+- Save combine_qpdf.rsc to a directory.    
+  You can set combine_qpdf.rsc by code below.    
 
 
 ```r
@@ -46,8 +46,8 @@ automater::set_rsc(file, path)
 
 
 - Copy PDF files to the same directory with combine_qpdf.rsc.   
-- Click combine_qpdf.rsc on Windows (combine_qpdf.command on Mac).   
-- Then a black command windows will be opened and wait a moment.   
+- Click combine_qpdf.rsc.   
+- Then a black command window will be opened and wait a moment.   
 - At the first time to run combine_qpdf.rsc, it may take few minutes to install packages.   
 - The order to combined files is the same with the order of the file names.    
   You need to rename files before using combine_qpdf.rsc.    
@@ -72,8 +72,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> }
 #> 
 #> pkg <- "automater"
-#> if(! pkg %in% installed.packages()[,1]){
-#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> ver <- utils::packageDescription(pkg, fields = "Version")
+#> if(utils::compareVersion(ver, "0.2.0") < 0){
+#>   devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 #> }
 #> 
 #> automater::validate_package("qpdf")
@@ -83,4 +84,6 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> files <- sort(list.files(pattern = "\\.pdf"))
 #> output <- paste0("combined_", Sys.Date(), "_", format(Sys.time(), "%H_%M_%S"), ".pdf")
 #> qpdf::pdf_combine(files, output)
+#> 
+#> automater::message_to_continue()
 ```

@@ -48,12 +48,14 @@ for(file in files){
 ```
 
 
-To run automater::deepl_api() automatically and save contents into text files, 
+On Windows, To run automater::deepl_api() automatically and save contents into text files, 
 use translate_deeplr.rsc in rsc directory within automater package.
 When input file name is "neko.txt", output file will be "translated_neko.txt" 
 
-- Save deepl_api.rsc (and deepl_api.command, then chmod deepl_api.command "755" on Mac) to a directory.    
-  You can set deepl_api.rsc (and deepl_api.command on Mac) by code below.    
+
+
+- Save deepl_api.rsc to a directory.    
+  You can set deepl_api.rsc by code below.    
 
 
 ```r
@@ -68,8 +70,8 @@ automater::set_rsc(file, path)
 - Set your deepl api key in translate_deeplr.rsc (required).    
   api_key <- "set_your_key"   
 - Copy text files (*.txt) to the same directory with translate_deeplr.rsc.   
-- Click deepl_api.rsc on Windows (deepl_api.command on Mac).   
-- Then a black command windows will be opened and wait a moment.   
+- Click deepl_api.rsc.   
+- Then a black command window will be opened and wait a moment.   
 - At the first time to run deepl_api.rsc, it may take few minutes to install packages.   
 
 
@@ -104,8 +106,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #> }
 #> 
 #> pkg <- "automater"
-#> if(! pkg %in% installed.packages()[,1]){
-#>   devtools::install_github("matutosi/automater", force = TRUE)
+#> ver <- utils::packageDescription(pkg, fields = "Version")
+#> if(utils::compareVersion(ver, "0.2.0") < 0){
+#>   devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 #> }
 #> 
 #> automater::validate_package("deeplr")
@@ -119,4 +122,6 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #>   txt <- dplyr::mutate(txt, `:=`("jp", deepl_api(str = en, api_key = api_key)))
 #>   utils::write.table(txt, paste0("translated_", file), quote = FALSE, sep = "\t", row.names = FALSE)
 #> }
+#> 
+#> automater::message_to_continue()
 ```

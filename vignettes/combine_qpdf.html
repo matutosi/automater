@@ -362,10 +362,8 @@ qpdf::pdf_combine(files)</code></pre>
 <p>To run () automatically, use combine_qpdf.rsc in rsc directory within
 automater package.</p>
 <ul>
-<li>Save combine_qpdf.rsc (and combine_qpdf.command, then chmod
-combine_qpdf.command “755” on Mac) to a directory.<br />
-You can set combine_qpdf.rsc (and combine_qpdf.command on Mac) by code
-below.</li>
+<li>Save combine_qpdf.rsc to a directory.<br />
+You can set combine_qpdf.rsc by code below.</li>
 </ul>
 <pre class="r"><code>file &lt;- &quot;combine_qpdf&quot;
 path &lt;- &quot;c:/&quot; # set your path
@@ -375,10 +373,9 @@ automater::set_rsc(file, path)</code></pre>
 <a href="https://www.computerhope.com/issues/ch000572.htm" class="uri">https://www.computerhope.com/issues/ch000572.htm</a></p></li>
 <li><p>Copy PDF files to the same directory with combine_qpdf.rsc.<br />
 </p></li>
-<li><p>Click combine_qpdf.rsc on Windows (combine_qpdf.command on
-Mac).<br />
+<li><p>Click combine_qpdf.rsc.<br />
 </p></li>
-<li><p>Then a black command windows will be opened and wait a
+<li><p>Then a black command window will be opened and wait a
 moment.<br />
 </p></li>
 <li><p>At the first time to run combine_qpdf.rsc, it may take few
@@ -407,8 +404,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt; }
 #&gt; 
 #&gt; pkg &lt;- &quot;automater&quot;
-#&gt; if(! pkg %in% installed.packages()[,1]){
-#&gt;   devtools::install_github(&quot;matutosi/automater&quot;, force = TRUE)
+#&gt; ver &lt;- utils::packageDescription(pkg, fields = &quot;Version&quot;)
+#&gt; if(utils::compareVersion(ver, &quot;0.2.0&quot;) &lt; 0){
+#&gt;   devtools::install_github(&quot;matutosi/automater&quot;, upgrade = &quot;never&quot;, force = TRUE)
 #&gt; }
 #&gt; 
 #&gt; automater::validate_package(&quot;qpdf&quot;)
@@ -417,7 +415,9 @@ cat(readtext::readtext(rsc, verbosity = 0)$text)
 #&gt;   # Run
 #&gt; files &lt;- sort(list.files(pattern = &quot;\\.pdf&quot;))
 #&gt; output &lt;- paste0(&quot;combined_&quot;, Sys.Date(), &quot;_&quot;, format(Sys.time(), &quot;%H_%M_%S&quot;), &quot;.pdf&quot;)
-#&gt; qpdf::pdf_combine(files, output)</code></pre>
+#&gt; qpdf::pdf_combine(files, output)
+#&gt; 
+#&gt; automater::message_to_continue()</code></pre>
 
 
 
