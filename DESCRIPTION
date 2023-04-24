@@ -1,6 +1,6 @@
 Package: automater
 Title: Wrapper functions to Automate Manipulations Using R Packages
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person("Toshikazu", "Matsumura", , "matutosi@gmail.com", role = c("aut", "cre"))
 Description: To automate manipulations use R packages xlsx, qpdf, tesseract, Microsoft365R and others. 

@@ -30,9 +30,9 @@ create_email <- function(path, outlook){
   if("attachment" %in% colnames(df)){
     emails <- add_attachment(emails, df)
   }
-  for(i in seq_along(nrow(df))){
-    if(send$send[i] == 1){
-      send_email(emails[i])
+  for(i in seq(nrow(df))){
+    if(df$send[i] == 1){
+      emails[[i]]$send()
     }
   }
   return(emails)

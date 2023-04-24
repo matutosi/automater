@@ -11,16 +11,17 @@ if(! pkg %in% installed.packages()[,1]){
 }
 
 pkg <- "automater"
-if(! pkg %in% installed.packages()[,1]){
-  devtools::install_github("matutosi/automater", force = TRUE)
+ver <- utils::packageDescription(pkg, fields = "Version")
+if(utils::compareVersion(ver, "0.2.0") < 0){
+  devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 }
 
 automater::validate_package("Microsoft365R")
 
   # Run
 outlook <- Microsoft365R::get_business_outlook()
-path <- "outlook_Microsoft365R.xlsx"
-automater::create_email(path, outlook)
+path <- "d:/outlook_Microsoft365R.xlsx"
+create_email(path, outlook)
 
-message_to_continue()
+automater::message_to_continue()
 

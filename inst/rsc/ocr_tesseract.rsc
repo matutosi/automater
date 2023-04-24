@@ -11,8 +11,9 @@ if(! pkg %in% installed.packages()[,1]){
 }
 
 pkg <- "automater"
-if(! pkg %in% installed.packages()[,1]){
-  devtools::install_github("matutosi/automater", force = TRUE)
+ver <- utils::packageDescription(pkg, fields = "Version")
+if(utils::compareVersion(ver, "0.2.0") < 0){
+  devtools::install_github("matutosi/automater", upgrade = "never", force = TRUE)
 }
 
 automater::validate_package("tesseract")
@@ -28,5 +29,5 @@ for(file in files){
   writeLines(text, paste0(file, ".txt"))
 }
 
-message_to_continue()
+automater::message_to_continue()
 
