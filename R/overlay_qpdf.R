@@ -1,5 +1,12 @@
 #' Wrapper functions to overlay page numbers and others using package qpdf.
 #' 
+#' pdf_overlay_stamps_each() overlay PDF for each page in pdf file. 
+#' validate_page() is a helper function for pdf_overlay_stamps_each() 
+#' to validate page consistency of among page no. of input, stamp, start and end.
+#' pdf_overlay_page_num() and pdf_overlay_session_num() are wrapper functions to 
+#' overlay page no. and session no. for accademic congress or symposium etc. 
+#' pdf_overlay_page_num() can overlay up to 100 pages.
+#' 
 #' Package qpdf <https://cran.r-project.org/web/packages/qpdf/index.html>
 #' includes useful functions as shown bellow.
 #' pdf_length(), pdf_split(), pdf_subset(), pdf_combine(), 
@@ -13,10 +20,10 @@
 #' @param start,end    An integer of start and end page to be stamped.
 #'                     negative integer can be used for end, which means
 #'                     number from the last page.
-#' @param session      A string of session name. 
+#' @param session      A string of session name. Can use "a", "b", or "p".
 #'                     'session = "a"' uses 'pdf/00_sn_a.pdf' as stamp. 
 #'                     pdf directory include '00_sn_a.pdf', '00_sn_b.pdf', and '00_sn_p.pdf' 
-#'                     by default.
+#'                     by default, which invlude 50 pages (eg., A01, A02, ..., A50) respectively.
 #' @examples
 #' \dontrun{
 #' input <- system.file("pdf/00_sn_a.pdf", package = "automater")
@@ -51,6 +58,8 @@ pdf_overlay_stamps_each <- function(input, stamp, start = 1, end = NULL){
   return(outfile)
 }
 
+#' @rdname pdf_overlay
+#' @export
 validate_page <- function(len_input, len_stamp, start, end){
   if(end       < start)    { stop("end must be larger than start!") }
   if(len_input < start)    { stop("input pages must be larger than start!") }
