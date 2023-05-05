@@ -80,6 +80,21 @@ message_to_continue <- function(){
   scan("stdin", character(), nlines = 1)
 }
 
+#' Show message on prompt and Receieve user input from stdin
+#' @param  prompt  A string message to show on prompt
+#' @return  A string of user input
+#' 
+#' @export
+user_input <- function(prompt){
+  if (interactive()) {
+    input <- readline(prompt)
+  } else {
+    cat(prompt)
+    input <- readLines("stdin", n=1)
+  }
+  return(input)
+}
+
 #' Copy *.rsc (and *.command, and chmod on Mac)
 #' @param  file,path   A string of file and path
 #' 
@@ -102,3 +117,19 @@ get_os <- function(){
   )
 }
 
+
+#' Exclude vector elements that matches a condition.
+#' 
+#' @param x     A vector
+#' @param cond  A logical.
+#' @example
+#' 
+#' x <- 1:10
+#' x[! x < 5 ]
+#' x %>%
+#'   exclude(x < 5)
+#' 
+#' @export
+exclude <- function(x, cond){
+  x[!cond]
+}
