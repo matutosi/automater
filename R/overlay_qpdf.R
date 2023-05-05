@@ -8,6 +8,8 @@
 #' @name pdf_overlay
 #' @param input,stamp  A string of file name or path of pdf file.
 #'                     input is a base pdf and stamp will be overlayed.
+#'                     No. of pages in stamp PDF should be equal to or over no. of pages in input PDF.
+#'                     Pages in stamp exceeding pages over input pages will be ignored.
 #' @param start,end    An integer of start and end page to be stamped.
 #'                     negative integer can be used for end, which means
 #'                     number from the last page.
