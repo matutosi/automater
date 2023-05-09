@@ -20,6 +20,7 @@
 #' @param start,end    An integer of start and end page to be stamped.
 #'                     negative integer can be used for end, which means
 #'                     number from the last page.
+#' @param len_input,len_stamp    An integer to validate.
 #' @param session      A string of session name. Can use "a", "b", or "p".
 #'                     'session = "a"' uses 'pdf/00_sn_a.pdf' as stamp. 
 #'                     pdf directory include '00_sn_a.pdf', '00_sn_b.pdf', and '00_sn_p.pdf' 

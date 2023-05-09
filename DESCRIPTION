@@ -25,6 +25,8 @@ Imports:
     xlsx,
     xml2
 Suggests:
+    KeyboardSimulator,
+    officer,
     curl,
     tesseract,
     Microsoft365R,

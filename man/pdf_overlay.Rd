@@ -3,11 +3,14 @@
 \name{pdf_overlay}
 \alias{pdf_overlay}
 \alias{pdf_overlay_stamps_each}
+\alias{validate_page}
 \alias{pdf_overlay_page_num}
 \alias{pdf_overlay_session_num}
 \title{Wrapper functions to overlay page numbers and others using package qpdf.}
 \usage{
 pdf_overlay_stamps_each(input, stamp, start = 1, end = NULL)
+
+validate_page(len_input, len_stamp, start, end)
 
 pdf_overlay_page_num(input, start = 1, end = NULL)
 
@@ -15,21 +18,33 @@ pdf_overlay_session_num(input, start = 1, end = NULL, session = "a")
 }
 \arguments{
 \item{input, stamp}{A string of file name or path of pdf file.
-input is a base pdf and stamp will be overlayed.}
+input is a base pdf and stamp will be overlayed.
+No. of pages in stamp PDF should be equal to or over no. of pages in input PDF.
+Pages in stamp exceeding pages over input pages will be ignored.}
 
 \item{start, end}{An integer of start and end page to be stamped.
 negative integer can be used for end, which means
 number from the last page.}
 
-\item{session}{A string of session name.
+\item{len_input, len_stamp}{An integer to validate.}
+
+\item{session}{A string of session name. Can use "a", "b", or "p".
 'session = "a"' uses 'pdf/00_sn_a.pdf' as stamp.
 pdf directory include '00_sn_a.pdf', '00_sn_b.pdf', and '00_sn_p.pdf'
-by default.}
+by default, which invlude 50 pages (eg., A01, A02, ..., A50) respectively.}
 }
 \value{
 A string of output pdf file.
 }
 \description{
+pdf_overlay_stamps_each() overlay PDF for each page in pdf file.
+validate_page() is a helper function for pdf_overlay_stamps_each()
+to validate page consistency of among page no. of input, stamp, start and end.
+pdf_overlay_page_num() and pdf_overlay_session_num() are wrapper functions to
+overlay page no. and session no. for accademic congress or symposium etc.
+pdf_overlay_page_num() can overlay up to 100 pages.
+}
+\details{
 Package qpdf \url{https://cran.r-project.org/web/packages/qpdf/index.html}
 includes useful functions as shown bellow.
 pdf_length(), pdf_split(), pdf_subset(), pdf_combine(),

@@ -2,10 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{get_os}
 \alias{get_os}
-\title{Get os name}
+\title{Get OS name}
 \usage{
 get_os()
 }
+\value{
+A string of OS name
+}
 \description{
-Get os name
+Get OS name
+}
+\examples{
+get_os()
+
 }

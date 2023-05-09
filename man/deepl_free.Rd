@@ -4,7 +4,6 @@
 \alias{deepl_free}
 \alias{start_selenium}
 \alias{stop_selenium}
-\alias{sleep}
 \title{Wrapper functions to use deepl translation using package RSelenium and others}
 \usage{
 deepl_free(str, rem, source_lang = "en", target_lang = "ja")
@@ -12,8 +11,6 @@ deepl_free(str, rem, source_lang = "en", target_lang = "ja")
 start_selenium()
 
 stop_selenium(rem)
-
-sleep(sec = 5)
 }
 \arguments{
 \item{str}{A character. Maximum length of character is 5000 in deepl_free().}
@@ -22,8 +19,6 @@ sleep(sec = 5)
 
 \item{source_lang, target_lang}{A character to select language.
 Use capital letters in deepl_api(), and small letters in deepl_free().}
-
-\item{sec}{A numeric (second) to sleep.}
 }
 \value{
 A character translated by deepl

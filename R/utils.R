@@ -106,7 +106,11 @@ set_rsc <- function(file, path){
   Sys.chmod(file.path(dir, file[2]), "755")
 }
 
-#' Get os name
+#' Get OS name
+#' 
+#' @return  A string of OS name
+#' @examples
+#' get_os()
 #' 
 #' @export
 get_os <- function(){
@@ -120,10 +124,10 @@ get_os <- function(){
 
 #' Exclude vector elements that matches a condition.
 #' 
-#' @param x     A vector
+#' @param x     A vector.
 #' @param cond  A logical.
-#' @example
-#' 
+#' @return  A vector.
+#' @examples
 #' x <- 1:10
 #' x[! x < 5 ]
 #' x %>%
@@ -132,4 +136,16 @@ get_os <- function(){
 #' @export
 exclude <- function(x, cond){
   x[!cond]
+}
+
+#' Wrapper function for Sys.sleep()
+#' 
+#' @param sec A numeric (second) to sleep.
+#' @return  Invisible NULL.
+#' @examples
+#' sleep(0.1)
+#' 
+#' @export
+sleep <- function(sec = 5){
+  Sys.sleep(sec)
 }

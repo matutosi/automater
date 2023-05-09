@@ -10,7 +10,6 @@
 #' @param rem An RSelenium object.
 #' @param source_lang,target_lang A character to select language.
 #'        Use capital letters in deepl_api(), and small letters in deepl_free().
-#' @param sec A numeric (second) to sleep.
 #' @return A character translated by deepl
 #' 
 #' @examples
@@ -65,12 +64,4 @@ start_selenium <- function(){
 stop_selenium <- function(rem){
   rem$close()
   shell("taskkill /f /im java.exe")
-}
-
-#' Wrapper function for Sys.sleep()
-#' 
-#' @rdname deepl_free
-#' @export
-sleep <- function(sec = 5){
-  Sys.sleep(sec)
 }
