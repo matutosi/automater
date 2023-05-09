@@ -32,6 +32,7 @@ write_docx <- function(doc, path){
   #   print(doc, target = path)
 }
 
+  # #' @importFrom officer print
   # #' @importFrom officer print.rdocx
   # #' @export
   # officer:::print.rdocx
