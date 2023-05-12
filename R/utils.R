@@ -73,10 +73,11 @@ is_duplicated <- function(x, y){
 }
 
 #' Display message to continue
+#' @param  msg A string to show.
 #' 
 #' @export
-message_to_continue <- function(){
-  print("Press [Enter] key to continue ...")
+message_to_continue <- function(msg = "Press [Enter] key to continue ..."){
+  print(msg)
   scan("stdin", character(), nlines = 1)
 }
 
