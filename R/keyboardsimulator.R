@@ -18,7 +18,7 @@ mouse_move_click <- function(x, y){
 #'        "interval < 0" means wait user input (any keys on R console).
 #' @return  A list of x and y position.
 #' @examples
-#' mouse_record()
+#' mouse_record(interval = 0.1)
 #' 
 #' @export
 mouse_record <- function(n = 5, interval = 1){
