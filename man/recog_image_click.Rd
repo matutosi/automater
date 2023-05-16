@@ -4,7 +4,7 @@
 \alias{recog_image_click}
 \title{Wrapper function for PyAutoGUI to recognize and click image.}
 \usage{
-recog_image_click(img, pag, wait = TRUE, ...)
+recog_image_click(img, pag, wait = TRUE, button = "left", hold = FALSE, ...)
 }
 \arguments{
 \item{img}{A string of path for image to recognize.}
@@ -19,7 +19,7 @@ FALSE: When not found image, return error.}
 \item{...}{More arguments to pass pag$locateOnScreen().}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{A linvisible list ($x, $y) of clicked position.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A invisible list ($x, $y) of clicked position.
 }\if{html}{\out{</div>}}
 }
 \description{
