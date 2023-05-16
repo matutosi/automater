@@ -1,14 +1,16 @@
 #' Wrapper function for mouse.move() and mouse.click()
 #' 
-#' @param x,y  A numeric to move.
+#' @param x,y    A numeric to move.
+#' @param button A string. "left", "right", or "middle".
+#' @param hold   A logical. If the button should be held down.
 #' @return  Invisible NULL.
 #' @examples
 #' mouse_move_click(100, 100)
 #' 
 #' @export
-mouse_move_click <- function(x, y){
+mouse_move_click <- function(x, y, button = "left", hold = FALSE){
   KeyboardSimulator::mouse.move(x, y)
-  KeyboardSimulator::mouse.click()
+  KeyboardSimulator::mouse.click(button = button, hold = hold)
   sleep(0.5)
 }
 

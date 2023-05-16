@@ -7,7 +7,7 @@
 #'             TRUE: Wait untill finding a image.
 #'             FALSE: When not found image, return error.
 #' @param ...  More arguments to pass pag$locateOnScreen().
-#' @return     A linvisible list ($x, $y) of clicked position.
+#' @return     A invisible list ($x, $y) of clicked position.
 #' @examples
 #' python_path <- find_python()
 #' reticulate::use_python(python_path)
@@ -16,7 +16,8 @@
 #' recog_image_click(igm, pag)
 #' 
 #' @export
-recog_image_click <- function(img, pag, wait = TRUE, ...){
+recog_image_click <- function(img, pag, wait = TRUE, 
+                              button = "left", hold = FALSE, ...){
   position <- pag$locateOnScreen(img, ...)
   if(wait){
     while(is.null(position)){
@@ -28,7 +29,7 @@ recog_image_click <- function(img, pag, wait = TRUE, ...){
     stop("img not foud: ", img)
   }
   pos <- center(position)
-  mouse_move_click(pos$x, pos$y)
+  mouse_move_click(pos$x, pos$y, button = button, hold = hold)
   return(invisible(pos))
 }
 
@@ -71,4 +72,33 @@ display_size <- function(){
   size <- KeyboardSimulator::mouse.get_cursor()
   KeyboardSimulator::mouse.move(pos[1], pos[2])
   return(list(width = size[1], height = size[2]))
+}
+
+#' Get screenshot.
+#' 
+#' @param path A string of path to save image.
+#' @param pag  A python.builtin.module built 
+#'             by reticulate::import("pyautogui")
+#' @param region A integer vector including four elements.
+#'               c(x-axis, y-axis, width, height)
+#' @return     A invisible string of image path.
+#' @examples
+#' python_path <- find_python()
+#' reticulate::use_python(python_path)
+#' pag <- reticulate::import("pyautogui")
+#' screenshot("ss.png", pag = pag)
+#' screenshot("ss.png", region = c(100, 100, 100, 100), pag = pag)
+#' 
+#' @export
+screenshot <- function(path, region = NULL, pag = NULL){
+  if(is.null(pag)){
+    pag <- reticulate::import("pyautogui")
+  }
+  if(is.null(region)){
+    display <- display_size()
+    region <- as.integer(c(0, 0, display$width, display$height))
+  }
+  ss <- pag$screenshot(region = region)
+  ss$save(path)
+  return(invisible(path))
 }
