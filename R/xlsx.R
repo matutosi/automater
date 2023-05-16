@@ -9,6 +9,7 @@
 #' @name xlsx
 #' @param sh    A excel sheet.
 #' @param file  A string of excel file name.
+#' @param password A String of the password.
 #' @examples
 #' \donttest{
 #' files <- list.files(pattern = "xls")
@@ -18,13 +19,13 @@
 #' }
 #' 
 #' @export
-set_af_fp <- function(file){
-  wb <- xlsx::loadWorkbook(file)
+set_af_fp <- function(file, password = NULL){
+  wb <- xlsx::loadWorkbook(file, password = password)
   for(sh in xlsx::getSheets(wb)){
     set_auto_filter(sh)
     set_freeze_panel(sh)
   }
-  xlsx::saveWorkbook(wb, file)
+  xlsx::saveWorkbook(wb, file, password = password)
 }
 
 #' @rdname xlsx
