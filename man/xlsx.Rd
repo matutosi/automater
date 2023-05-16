@@ -7,7 +7,7 @@
 \alias{set_freeze_panel}
 \title{Wrapper functions to manipulate excel work books and sheets using package xlsx.}
 \usage{
-set_af_fp(file)
+set_af_fp(file, password = NULL)
 
 set_auto_filter(sh)
 
@@ -15,6 +15,8 @@ set_freeze_panel(sh)
 }
 \arguments{
 \item{file}{A string of excel file name.}
+
+\item{password}{A String of the password.}
 
 \item{sh}{A excel sheet.}
 }
