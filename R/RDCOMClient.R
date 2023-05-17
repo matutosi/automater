@@ -14,9 +14,11 @@ docx2pdf <- function(path){
   wordApp <- RDCOMClient::COMCreate("Word.Application")
   wordApp[["Visible"]] <- TRUE
   wordApp[["Documents"]]$Add()
-  wordApp[["Documents"]]$Open(Filename = path)
-  wordApp[["ActiveDocument"]]$SaveAs(pdf, 
-  FileFormat = 17) # FileFormat=17 saves as pdf
+  wordApp[["Documents"]]$Open(Filename = normalizePath(path))
+   # FileFormat=17 saves as pdf
+  wordApp[["ActiveDocument"]]$SaveAs(pdf, FileFormat = 17)
+  # 20 .html ?
+  # 23 .txt ?
   wordApp$Quit()
   return(invisible(pdf))
 }
