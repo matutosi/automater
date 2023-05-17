@@ -1,3 +1,28 @@
+#' Convert path strings.
+#' 
+#' @param path,sub_dir,pre,post,ext   
+#'             A string of path, sub directory, prepositive, postpositive, and extension.
+#' @return  A string of path.
+#' @examples
+#' library(tidyverse)
+#' fs::path_package("automater", "rsc") %>%
+#'   fs::dir_ls() %>%
+#'   print() %>%
+#'   path_convert(sub_dir = "sub", pre = "PRE_", post = "_POST", ext = "R")
+#' 
+#' @export
+path_convert <- function(path, sub_dir = NULL, pre = NULL, post = NULL, ext = NULL){
+  dir <- fs::path_dir(path)
+  file <- fs::path_file(path)
+  if(!is.null(ext)) { file <- fs::path_ext_set(file, ext) }
+  file <- paste0(pre, fs::path_ext_remove(file), post, ".", fs::path_ext(file))
+  if(is.null(sub_dir)) { 
+    return(fs::path(dir, file))
+  }else{
+    return(fs::path(dir, sub_dir, file))
+  }
+}
+
 #' Check package installation and install it when not yet.
 #' 
 #' @param pkg    A string of package names.
