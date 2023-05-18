@@ -147,7 +147,6 @@ get_os <- function(){
   )
 }
 
-
 #' Exclude vector elements that matches a condition.
 #' 
 #' @param x     A vector.
