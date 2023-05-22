@@ -1,11 +1,11 @@
 #' Wrapper function to convert docx into pdf using package RDCOMClient.
-#' 
+#'
 #' @param path A string of docx path to convert.
 #' @examples
 #' \dontrun{
 #' docx2pdf()
 #' }
-#' 
+#'
 #' @return  An invisible string of pdf path.
 #' @export
 docx2pdf <- function(path){
@@ -23,19 +23,21 @@ docx2pdf <- function(path){
 
 #' Wrapper function to convert document among pdf, xps, html, trf, and txt.
 #' Needs MS Word.
-#' 
+#'
 #' @param path   A string of documents.
 #' @param format A string of file format to convert.
-#'               Avairable: "pdf", "xps", "html, "rtf", "txt".
+#'               Avairable: "docx", "pdf", "xps", "html, "rtf", "txt".
 #' @examples
 #' \dontrun{
+#' library(RDCOMClient)
 #' convert_docs("document_path", "pdf")
 #' }
 #' @return  An invisible string of document path.
 #' @export
 convert_docs <- function(path, format){
   if(fs::path_ext(path) == format){ return(invisible(path)) }
-  no <- switch(format, 
+  no <- switch(format,
+                "docx" = 11,
                 "pdf"  = 17,
                 "xps"  = 19,
                 "html" = 20,
@@ -44,7 +46,7 @@ convert_docs <- function(path, format){
    # needs normalizePath(), do NOT use fs::path_norm() <- not work
   path <- normalizePath(path)
   suppressWarnings({
-    converted <- 
+    converted <-
       normalizePath(path_convert(path, pre = "converted_", ext = format))
   })
   wordApp <- RDCOMClient::COMCreate("Word.Application")
