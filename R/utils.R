@@ -174,3 +174,16 @@ exclude <- function(x, cond){
 sleep <- function(sec = 5){
   Sys.sleep(sec)
 }
+
+
+#' Add double quotation mark before and after string
+#' 
+#' @param x  A string.
+#' @return   A string.
+#' @examples
+#' double_quote("some string")
+#' 
+#' @export
+double_quote <- function(x){
+  paste0('"', x, '"')
+}
