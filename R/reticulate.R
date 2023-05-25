@@ -16,7 +16,12 @@ find_python <- function(select_memu = TRUE){
     system(intern = TRUE) %>%
     fs::path()
   if(length(python_path) > 1){
-    choice <- utils::menu(python_path, title = "Select Python path")
+    if(select_memu){
+      choice <- utils::menu(python_path, title = "Select Python path. 0: exit and return all.")
+      if(choice == 0){ return(python_path) }
+    }else{
+      return(python_path)
+    }
   }else{
     choice <- 1
   }
