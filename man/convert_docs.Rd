@@ -11,7 +11,7 @@ convert_docs(path, format)
 \item{path}{A string of documents.}
 
 \item{format}{A string of file format to convert.
-Avairable: "pdf", "xps", "html, "rtf", "txt".}
+Avairable: "docx", "pdf", "xps", "html, "rtf", "txt".}
 }
 \value{
 An invisible string of document path.
@@ -22,6 +22,7 @@ Needs MS Word.
 }
 \examples{
 \dontrun{
+library(RDCOMClient)
 convert_docs("document_path", "pdf")
 }
 }
