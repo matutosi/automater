@@ -3,15 +3,16 @@
 #' @param x,y    A numeric to move.
 #' @param button A string. "left", "right", or "middle".
 #' @param hold   A logical. If the button should be held down.
+#' @param sleep_sec  A numeric to sleep.
 #' @return  Invisible NULL.
 #' @examples
 #' mouse_move_click(100, 100)
 #' 
 #' @export
-mouse_move_click <- function(x, y, button = "left", hold = FALSE){
+mouse_move_click <- function(x, y, button = "left", hold = FALSE, sleep_sec = 0.5){
   KeyboardSimulator::mouse.move(x, y)
   KeyboardSimulator::mouse.click(button = button, hold = hold)
-  sleep(0.5)
+  sleep(sleep_sec)
 }
 
 #' Wrapper function for recording mouse.get_cursor() position
