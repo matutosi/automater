@@ -56,21 +56,23 @@ make_shortcut <- function(exe, shortcut = NULL, dir = NULL,
   input <- paste0(wsh, create, target, icon, size, arg, wd, finish)
   cmd <- "powershell"
   res <- shell(cmd, input = input, intern = TRUE)
+  shortcut <- stringr::str_remove_all_all(shortcut, "\"")
   return(list(shortcut = shortcut, res = res))
 }
+
 
 #' Add path on Windows
 #' 
 #' @rdname make_shortcut
 #' @export
 add_path <- function(new_path){
-  if(!fs::dir_exists(dir)){
-    stop("path ", new_path, " not found!")
-  }
+  #   if(!fs::dir_exists(dir)){
+  #     stop("path ", new_path, " not found!")
+  #   }
   cmd <- 'reg query "HKEY_CURRENT_USER\\Environment" /v "path"'
   path <- 
     shell(cmd, intern = TRUE)[3] %>%
-    stringr::str_replace(" *path *REG_[A-z]* *", "") %>%
+    stringr::str_remove(" *path *REG_[A-z]* *") %>%
     double_quote()
   cmd <- paste0("setx path ", normalizePath(new_path), ";", path)
   shell(cmd, intern = TRUE)
