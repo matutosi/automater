@@ -187,3 +187,23 @@ sleep <- function(sec = 5){
 double_quote <- function(x){
   paste0('"', x, '"')
 }
+
+
+#' Add double quotation mark before and after string
+#' 
+#' 
+#' reference: https://search.r-project.org/CRAN/refmans/FFD/html/lls.html
+#' @return   A list of class name with its object name.
+#' @examples
+#' ls_class()
+#' 
+#' @export
+ls_class <- function(){
+  classes <- 
+    ls() %>%
+    purrr::map(function(text){ parse(text = text) }) %>%
+    purrr::map(eval) %>%
+    purrr::map(class)
+  names(classes) <- ls()
+  return(classes)
+}
