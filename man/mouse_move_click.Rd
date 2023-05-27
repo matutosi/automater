@@ -4,7 +4,7 @@
 \alias{mouse_move_click}
 \title{Wrapper function for mouse.move() and mouse.click()}
 \usage{
-mouse_move_click(x, y, button = "left", hold = FALSE)
+mouse_move_click(x, y, button = "left", hold = FALSE, sleep_sec = 0.5)
 }
 \arguments{
 \item{x, y}{A numeric to move.}
@@ -12,6 +12,8 @@ mouse_move_click(x, y, button = "left", hold = FALSE)
 \item{button}{A string. "left", "right", or "middle".}
 
 \item{hold}{A logical. If the button should be held down.}
+
+\item{sleep_sec}{A numeric to sleep.}
 }
 \value{
 Invisible NULL.
