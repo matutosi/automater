@@ -2,13 +2,26 @@
 % Please edit documentation in R/replace_officer.R
 \name{expand_file}
 \alias{expand_file}
-\title{Helper function}
+\title{Helper function for replace_doc_officer()}
 \usage{
-expand_file(x, files)
+expand_file(replacement)
 }
 \arguments{
-\item{x, files}{A string vector. ???}
+\item{replacement}{A dataframe including cols with "file", "old_value", and "new_value"}
+}
+\value{
+A dataframe with expanded files
 }
 \description{
-Helper function
+Helper function for replace_doc_officer()
+}
+\examples{
+replacement <- 
+  tibble::tribble(
+    ~file   , ~old_value, ~new_value,
+    "a.docx", "置換前", "置換後",
+    "b.docx", "変換前", "変換後",
+    "a.docx,b.docx", "へんかん", "変換")
+expand_file(replacement)
+
 }

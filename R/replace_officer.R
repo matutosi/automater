@@ -52,14 +52,36 @@ extract_text <- function(doc, drop_na = TRUE, drop_empty = TRUE){
   return(text)
 }
 
-#' Helper function
-#' @param x,files  A string vector. ???
+#' Helper function for replace_doc_officer()
+#' @param  replacement  A dataframe including cols with "file", "old_value", and "new_value"
+#' @return A dataframe with expanded files
+#' @examples
+#' replacement <- 
+#'   tibble::tribble(
+#'     ~file   , ~old_value, ~new_value,
+#'     "a.docx", "置換前", "置換後",
+#'     "b.docx", "変換前", "変換後",
+#'     "a.docx,b.docx", "へんかん", "変換")
+#' expand_file(replacement)
+#' 
 #' @export
-expand_file <- function(x, files){
-  tidyr::expand_grid(file = files, exp = x[["file"]]) %>%
-  dplyr::filter(stringr::str_detect(file, exp)) %>%
-  dplyr::left_join(x, by = c("exp" = "file")) %>%
-  dplyr::select(-exp)
+expand_file <- function(replacement){
+  into <- 
+    replacement[["file"]] %>%
+    stringr::str_count(",") %>%
+    max() %>%
+    `+`(1) %>%
+    seq() %>%
+    letter()
+  replacement %>%
+    tidyr::separate(file, into = into, sep = ",", fill = "right") %>%
+    tidyr::pivot_longer(all_of(into), names_to = "name", values_to = "file", values_drop_na = TRUE) %>%
+    dplyr::select(-all_of("name"))
+}
+
+#' Shortcut to get letters
+letter <- function(x){
+  letters[x]
 }
 
 #' Helper function
