@@ -22,34 +22,22 @@ replace_doc_officer <- function(doc, old_value, new_value, body = TRUE, header =
   return(doc)
 }
 
-#' Wrapper functions to write docx using package officer.
-#' @param doc      A doc object.
-#' @param path     A string of path.
+#' Helper function
+#' @param replacement   A daraframe including cols: "file", "old_value", and "new_value".
 #' @export
-write_docx <- function(doc, path){
-  # getS3method("print", "rdocx")
-  officer:::print.rdocx(doc, target = path)
-  #   print(doc, target = path)
-}
-
-  # #' @importFrom officer print
-  # #' @importFrom officer print.rdocx
-  # #' @export
-  # officer:::print.rdocx
-
-
-#' Wrapper functions to extract text using package officer.
-#' @param doc                 A doc object.
-#' @param drop_na,drop_empty  A logical.
-#' @export
-extract_text <- function(doc, drop_na = TRUE, drop_empty = TRUE){
-  text <- 
-    doc %>%
-    officer::docx_summary() %>%
-    `[[`("text")
-  if(drop_na   ){ text <- stats::na.omit(text)    }
-  if(drop_empty){ text <- text[text != ""] }
-  return(text)
+replace_docs <- function(replacement){
+  files <- unique(replacement$file)
+  for(f in files){
+    rep <- dplyr::filter(replacement, file == f)
+    doc <- officer::read_docx(f)
+    for(i in seq(nrow(rep))){
+      ov <- rep[["old_value"]][i]
+      nv <- rep[["new_value"]][i]
+      replace_doc_officer(doc, ov, nv)
+      print(paste0("Replaced '", ov, "' by '", nv, "' in ", f))
+    }
+    write_docx(doc, path_convert(f, pre = "replaced_"))
+  }
 }
 
 #' Helper function for replace_doc_officer()
@@ -84,17 +72,31 @@ letter <- function(x){
   letters[x]
 }
 
-#' Helper function
-#' @param path,replacement     A string of path or replacement.
+#' Wrapper functions to write docx using package officer.
+#' @param doc      A doc object.
+#' @param path     A string of path.
 #' @export
-replace_docs <- function(path, replacement){
-  rep <- dplyr::filter(replacement, file == path)
-  doc <- officer::read_docx(path)
-  for(i in 1:nrow(rep)){
-    ov <- rep[["old_value"]][i]
-    nv <- rep[["new_value"]][i]
-    replace_doc_officer(doc, ov, nv)
-    print(paste0("Replaced '", ov, "' by '", nv, "' in ", path))
-  }
-  write_docx(doc, paste0("replaced_", path))
+write_docx <- function(doc, path){
+  # getS3method("print", "rdocx")
+  officer:::print.rdocx(doc, target = path)
+  #   print(doc, target = path)
+}
+
+  # #' @importFrom officer print
+  # #' @importFrom officer print.rdocx
+  # #' @export
+  # officer:::print.rdocx
+
+#' Wrapper functions to extract text using package officer.
+#' @param doc                 A doc object.
+#' @param drop_na,drop_empty  A logical.
+#' @export
+extract_text <- function(doc, drop_na = TRUE, drop_empty = TRUE){
+  text <- 
+    doc %>%
+    officer::docx_summary() %>%
+    `[[`("text")
+  if(drop_na   ){ text <- stats::na.omit(text)    }
+  if(drop_empty){ text <- text[text != ""] }
+  return(text)
 }

@@ -4,10 +4,10 @@
 \alias{replace_docs}
 \title{Helper function}
 \usage{
-replace_docs(path, replacement)
+replace_docs(replacement)
 }
 \arguments{
-\item{path, replacement}{A string of path or replacement.}
+\item{replacement}{A daraframe including cols: "file", "old_value", and "new_value".}
 }
 \description{
 Helper function
