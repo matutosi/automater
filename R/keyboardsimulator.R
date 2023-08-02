@@ -41,69 +41,148 @@ mouse_record <- function(n = 5, interval = 1){
   return(list(x = unlist(x), y = unlist(y)))
 }
 
+## WIP
+  # img2matrix <- function(img){
+  #   df <- as.data.frame(img)
+  #   mt <- tapply(df$value, list(df$x, df$y, df$cc), c)
+  #   if(4 ==dim(mt)[3]) mt <- mt[,,1:3]
+  #   return(mt)
+  # }
 img2matrix <- function(img){
-  df <- as.data.frame(img)
-  tapply(df$value, list(df$y, df$x, df$cc), c)
+  mt <- img[,,1,]
+  if(4 ==dim(mt)[3]) mt <- mt[,,1:3]
+  return(mt)
 }
+
 is_equal_matrix <- function(mt_1, mt_2){
-  !sum(mt_1 != mt_2)
+      is_equal <- 0 == sum(mt_1 != mt_2)
+      return(is_equal)
 }
 
+#' Locate image position
+#' 
+#' @param needle_image,haystack_image  A image.
+#' @param center                       A logical. 
+#'                                     TRUE returns center position of needle_image.
+#' @return  A vector (x-y) integer of location for ndl_img.
+#' @examples
+#' library(tidyverse)
+#' library(imager)
+#' haystack_image <- load.example("parrots")
+#' pos_x <- 200; pos_y <- 200
+#' size_x <- 50; size_y <- 20
+#' needle_image <- 
+#'   haystack_image %>%
+#'   imsub( pos_x < x & x < pos_x + size_x) %>%
+#'   imsub( pos_y < y & y < pos_y + size_y)
+#' 
+#' layout(t(1:2))
+#' plot(needle_image)
+#' plot(haystack_image)
+#' 
+#' locate_image(needle_image, haystack_image)
+#' 
+#' 
+#' @export
+locate_image <- function(needle_image, haystack_image, center = TRUE){
+  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  # 
+  # TODO: 以下を参考にしてC++で書き直す
+  #   D:/matu/work/ToDo/wameicheckr/src/editdist.cpp
+  #   D:/matu/work/stat/R/c/matutosi.c
+  #   
+  # webでコンパイル
+  #   https://paiza.io/projects/kS1b4f2kWLKZ0J8oKCK3kw?language=cpp
+  # 
+  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # 
+  ndl_h <- height(needle_image)
+  ndl_w <- width(needle_image)
+  hay_h <- height(haystack_image)
+  hay_w <- width(haystack_image)
+  ndl_mt <- img2matrix(needle_image)
+  hay_mt <- img2matrix(haystack_image)
 
-library(imager)
-library(tidyverse)
-  # ls("package:imager") %>% str_subset("crop")
-  # ls("package:imager") %>% str_subset("gray")
-
-size <- 10
-times <- 10
-
-hey_img <- 
-  load.example("parrots") %>%
-  imsub( 200 < x & x < 200 + size*times) %>%  
-  imsub( 200 < y & y < 200 + size*times)
-pos_x <- 10
-pos_y <- 8
-ndl_img <- 
-  hey_img %>%
-  imsub( pos_x < x & x < pos_x + size) %>%  
-  imsub( pos_y < y & y < pos_y + size)
-
-  # layout(t(1:2))
-  # plot(ndl_img)
-  # plot(hey_img)
-
-locate_image <- function(ndl_img, hey_img){
-  ndl_h <- height(ndl_img)
-  ndl_w <- width (ndl_img)
-  hey_h <- height(hey_img)
-  hey_w <- width (hey_img)
-  ndl_mt <- img2matrix(ndl_img)
-  hey_mt <- img2matrix(hey_img)
-
-ndl_mt[,,1]
-hey_mt[,,1]
-
-  last_x <- hey_w - ndl_w + 1
-  last_y <- hey_h - ndl_h + 1
+  last_x <- hay_w - ndl_w + 1
+  last_y <- hay_h - ndl_h + 1
   xs <- 1:last_x
   ys <- 1:last_y
-  offsets <- 0:(ndl_h - 1)
+  row_nos <- 0:(ndl_h - 1)
 
   for(x in xs){
     for(y in ys){
-      for(offset in offsets){
-        is_matched <- is_equal_matrix(ndl_mt[1 + offset, , ], hey_mt[x + offset, y:(y + ndl_w - 1),])
-  # print(str_c(x, y, offset, sep = ", "))
-  # print(ndl_mt[1 + offset, ,1])
-  # print(hey_mt[x + offset, y:(y + ndl_w - 1),1])
+      for(row_no in row_nos){
+        is_matched <- is_equal_matrix(ndl_mt[, 1 + row_no, ], hay_mt[x:(x + ndl_w - 1), y + row_no, ])
+  # # for debug
+  # print(str_c(x, y, row_no, sep = ", "))
+  # print(ndl_mt[1 + row_no, ,1])
+  # print(hay_mt[x + row_no, y:(y + ndl_w - 1),1])
         if(!is_matched){
           break
         }else{
-print(str_c(x, y, sep = ", "))
-print(is_matched)
+  # # for debug
+  # print(str_c(x, y, sep = ", "))
+  # print(is_matched)
+        }
+        if(row_no == row_nos[ndl_h]){
+          if(center){
+            return(c(x + floor(ndl_w/2), y + floor(ndl_h/2)))
+          }else{
+            return(c(x-1, y-1))
+          }
         }
       }
     }
   }
+
+  warning("Not found needle_image in haystack_image")
+}
+
+
+
+## 
+if(0){
+  # ls("package:imager") %>% str_subset("load")
+  # ls("package:imager") %>% str_subset("rbg")
+rm(list=ls(all=TRUE)); gc(); gc()
+library(tidyverse)
+library(imager)
+
+needle_image   <- load.image("D:/matu/work/tmp/needle_image.png")
+haystack_image <- load.image("D:/matu/work/tmp/haystack_image.png")
+
+locate_image(needle_image, haystack_image)
+
+system.time(pos1 <- locate_image(needle_image, haystack_image))
+system.time(pos2 <- locate_image(needle_image, haystack_image, FALSE))
+
+
+system.time(img2matrix(haystack_image))
+
+
+img2matrix(needle_image)
+
+KeyboardSimulator::mouse.move(970, 97)
+
+
+layout(t(1:2))
+plot(needle_image)
+plot(haystack_image)
+
+needle_image
+str(needle_image)
+
+
+tmp <- load.image("D:/matu/work/tmp/tmp.png")
+
+dim(tmp[])
+str(tmp[])
+class(tmp[])
+
+
+tmp[,,1,]
+img2matrix(tmp)
+
+
+matrix()
+
 }
