@@ -1,0 +1,5 @@
+*.o
+*.so
+*.dll
+numeric_vector.cpp
+sum.cpp
