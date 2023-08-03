@@ -23,7 +23,8 @@ Imports:
     rvest,
     utils,
     xlsx,
-    xml2
+    xml2,
+    Rcpp
 Suggests:
     KeyboardSimulator,
     officer,
@@ -44,3 +45,5 @@ Suggests:
 Config/testthat/edition: 3
 Language: en-US
 VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp
