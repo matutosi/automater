@@ -4,7 +4,7 @@
 #'             A string of path, sub directory, prepositive, postpositive, and extension.
 #' @return  A string of path.
 #' @examples
-#' library(tidyverse)
+#' library(magrittr)
 #' fs::path_package("automater", "rsc") %>%
 #'   fs::dir_ls() %>%
 #'   print() %>%

@@ -6,6 +6,9 @@
 #' @param wait A logical. 
 #'             TRUE: Wait untill finding a image.
 #'             FALSE: When not found image, return error.
+#' @param button  A string of mouse: "left" or "right".
+#' @param hold A logical. 
+#'             TRUE: Keep holding.
 #' @param ...  More arguments to pass pag$locateOnScreen().
 #' @return     A invisible list ($x, $y) of clicked position.
 #' @examples

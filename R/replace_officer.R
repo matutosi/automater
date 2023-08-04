@@ -63,11 +63,13 @@ expand_file <- function(replacement){
     letter()
   replacement %>%
     tidyr::separate(file, into = into, sep = ",", fill = "right") %>%
-    tidyr::pivot_longer(all_of(into), names_to = "name", values_to = "file", values_drop_na = TRUE) %>%
-    dplyr::select(-all_of("name"))
+    tidyr::pivot_longer(dplyr::all_of(into), names_to = "name", values_to = "file", values_drop_na = TRUE) %>%
+    dplyr::select(-dplyr::all_of("name"))
 }
 
 #' Shortcut to get letters
+#' @param x  An integer.
+#' @export
 letter <- function(x){
   letters[x]
 }

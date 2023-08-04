@@ -4,7 +4,7 @@
 \alias{find_python}
 \title{Find a path of Python.}
 \usage{
-find_python(select_memu = TRUE)
+find_python(select_menu = TRUE)
 }
 \arguments{
 \item{select_menu}{A logical to show select menu.

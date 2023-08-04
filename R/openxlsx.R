@@ -12,7 +12,7 @@
 #' }
 #' 
 #' @export
-set_af_fp <- function(file){
+set_af_fp2 <- function(file){
   wb <- openxlsx::loadWorkbook(file)
   for(sheet in openxlsx::sheets(wb)){
     df <- openxlsx::readWorkbook(wb, sheet)

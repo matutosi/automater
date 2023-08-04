@@ -7,7 +7,7 @@
 #' @param exe,shortcut,dir,arg,wd  A string of exe file, shortcut name, directory of shortcut, 
 #'                                 command line arguments, and working directory.
 #' @param new_path                  A string of path to add.
-#' @return size  A numeric for window size. 1: normal, 3: max, 7: min.
+#' @param size  A numeric for window size. 1: normal, 3: max, 7: min.
 #' @return make_shortcut() returns A list including shortcut path, and result of shell(), 
 #'         add_path() returns A result of shell().
 #' @examples

@@ -16,7 +16,7 @@ A string of path.
 Convert path strings.
 }
 \examples{
-library(tidyverse)
+library(magrittr)
 fs::path_package("automater", "rsc") \%>\%
   fs::dir_ls() \%>\%
   print() \%>\%

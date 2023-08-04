@@ -20,11 +20,11 @@ add_path(new_path)
 \item{exe, shortcut, dir, arg, wd}{A string of exe file, shortcut name, directory of shortcut,
 command line arguments, and working directory.}
 
+\item{size}{A numeric for window size. 1: normal, 3: max, 7: min.}
+
 \item{new_path}{A string of path to add.}
 }
 \value{
-size  A numeric for window size. 1: normal, 3: max, 7: min.
-
 make_shortcut() returns A list including shortcut path, and result of shell(),
 add_path() returns A result of shell().
 }

@@ -6,6 +6,9 @@
 \usage{
 letter(x)
 }
+\arguments{
+\item{x}{An integer.}
+}
 \description{
 Shortcut to get letters
 }

@@ -16,6 +16,11 @@ by reticulate::import("pyautogui")}
 TRUE: Wait untill finding a image.
 FALSE: When not found image, return error.}
 
+\item{button}{A string of mouse: "left" or "right".}
+
+\item{hold}{A logical.
+TRUE: Keep holding.}
+
 \item{...}{More arguments to pass pag$locateOnScreen().}
 }
 \value{
