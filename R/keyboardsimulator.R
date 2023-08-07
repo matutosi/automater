@@ -47,6 +47,7 @@ mouse_record <- function(n = 5, interval = 1){
 #' @param file  A string for file name of screenshot.
 #' @return      A file name of screenshot. When "", screenshot will be saved in a tempral directory.
 #' @examples
+#' library(imager)
 #' sc <- screenshot()
 #' imager::load.image(sc)
 #' 
@@ -62,9 +63,7 @@ screenshot <- function(file = ""){
   return(file)
 }
 
-
-## WIP
-#' Combert Cimg class into grayscale x-y matrix.
+#' Comvert Cimg class into grayscale x-y matrix.
 #' Use grayscale to Speed up and to simplify code.
 #' 
 #' @param img   A Cimg.
@@ -77,117 +76,144 @@ image2gray_matrix <- function(img){
   return(img[,,1,1])
 }
 
-#' @param needle_image,haystack_image  A image.
-#' @param center                       A logical. 
-#'                                     TRUE returns center position of needle_image.
-#' @return  A vector (x-y) integer of location for ndl_img.
+#' Cut off a part of image from a whole image. 
+#' 
+#' @param An image of Cimg.
+#' @param pos_x,pos_y  A numeric to indicate the top left corner of cuting image.
+#'                     When NULL, position will be randomly sampled.
+#' @param w,h          A numeric for width or height of the cutting image.
+#' @return An image of Cimg.
+#' @rdname 
 #' @examples
-#' library(magrittr)
 #' library(imager)
-#' haystack_image <- imager::load.example("parrots")
-#' pos_x <- 200; pos_y <- 200
-#' size_x <- 50; size_y <- 20
-#' needle_image <- 
-#'   haystack_image[
-#'     pos_x:(pos_x + size_x), 
-#'     pos_y:(pos_y + size_y),] %>%
-#'   as.cimg()
-#' 
-#' layout(t(1:2))
-#' plot(needle_image)
-#' plot(haystack_image)
-#' 
-#' locate_image(needle_image, haystack_image)
+#' library(magrittr)
+#' sc <- 
+#'   screenshot() %>%
+#'   imager::load.image()
+#' w <- 100
+#' h <- 80
+#' pos_x <- 0
+#' pos_y <- height(sc) - h
+#' needle <- hay2needle(sc, pos_x, pos_y, w, h)
+#' plot(needle)
 #' 
 #' @export
-locate_image <- function(needle_image, haystack_image, center = TRUE){
-  ndl_h <- imager::height(needle_image)
-  ndl_w <- imager::width(needle_image)
-  ndl_mt <- image2gray_matrix(needle_image)
-  hay_mt <- image2gray_matrix(haystack_image)
-  xy_pos <- locate_image_cpp(ndl_mt, hay_mt)
-  x <- xy_pos[1]
-  y <- xy_pos[2]
-  if(x == -1 & y == -1){
-    warning("needle_image NOT found in haystack_image")
-    return(xy_pos)
+hay2needle <- function(haystack_image, 
+                       pos_x = NULL, pos_y = NULL, 
+                       w = 50, h = 20){
+  if(is.null(pos_x)){
+    pos_x <- sample(imager::width(haystack_image)  -  w, 1)
   }
-  if(center){
-    return(c(x + ceiling(ndl_w/2), y + ceiling(ndl_h/2)))
-  }else{
-    return(c(x + 1, y + 1))
+  if(is.null(pos_y)){
+    pos_y <- sample(imager::height(haystack_image) -  h, 1)
   }
+  haystack_image %>%
+    imager::imsub(pos_x <= x & x <= pos_x + w - 1) %>%
+    imager::imsub(pos_y <= y & y <= pos_y + h - 1) %>%
+    imager::rm.alpha()
 }
 
-  # img2matrix <- function(img){
-  #   df <- as.data.frame(img)
-  #   mt <- tapply(df$value, list(df$x, df$y, df$cc), c)
-  #   if(4 ==dim(mt)[3]) mt <- mt[,,1:3]
-  #   return(mt)
-  # }
-  # img2matrix <- function(img){
-  #   mt <- img[,,1,]
-  #   if(4 ==dim(mt)[3]) mt <- mt[,,1:3]
-  #   return(mt)
-  # }
-is_equal_matrix_r <- function(mt_1, mt_2){
-  is_equal <- 0 == sum(mt_1 != mt_2)
-  return(is_equal)
-}
-
-#' Locate image position
+#' Convert array index into xy location in matrix.
+#' Helper function for locate_ndl_in_hay().
 #' 
-#' @param needle_image,haystack_image  A image.
-#' @param center                       A logical. 
-#'                                     TRUE returns center position of needle_image.
-#' @return  A vector (x-y) integer of location for ndl_img.
+#' @param index,nrow  A numeric.
+#' @return A pair numeric of xy postion.
 #' @examples
-#' library(magrittr)
-#' library(imager)
-#' haystack_image <- imager::load.example("parrots")
-#' pos_x <- 200; pos_y <- 200
-#' size_x <- 50; size_y <- 20
-#' needle_image <- 
-#'   haystack_image[
-#'     pos_x:(pos_x + size_x), 
-#'     pos_y:(pos_y + size_y),] %>%
-#'   as.cimg()
+#' nrow <- 4
+#' matrix(1:12, nrow = nrow)
+#' purrr::map(1:12, index2xy, nrow = nrow)
 #' 
-#' layout(t(1:2))
-#' plot(needle_image)
-#' plot(haystack_image)
-#' 
-#' locate_image(needle_image, haystack_image)
-#' 
-locate_image_r <- function(needle_image, haystack_image, center = TRUE){
-  ndl_h <- imager::height(needle_image)
-  ndl_w <- imager::width(needle_image)
-  hay_h <- imager::height(haystack_image)
-  hay_w <- imager::width(haystack_image)
-  ndl_mt <- image2gray_matrix(needle_image)
-  hay_mt <- image2gray_matrix(haystack_image)
+#' @export
+index2xy <- function(index, nrow){
+  x <- index %% nrow
+  y <- index %/% nrow
+  x[x == 0] <- nrow
+  y[x != 0] <- y + 1
+  return(c(x, y))
+}
 
-  last_x <- hay_w - ndl_w + 1
-  last_y <- hay_h - ndl_h + 1
- 
-  row_nos <- 0:(ndl_h - 1)
-  for(x in 1:last_x){
-    for(y in 1:last_y){
-      for(row_no in row_nos){
-        is_matched <- is_equal_matrix_r(ndl_mt[, 1 + row_no], hay_mt[x:(x + ndl_w - 1), y + row_no])
-        if(!is_matched){
-          break
-        }else{
-        }
-        if(row_no == row_nos[ndl_h]){
-          if(center){
-            return(c(x + floor(ndl_w/2), y + floor(ndl_h/2)))
-          }else{
-            return(c(x-1, y-1))
-          }
-        }
+#' Compare values within tow arrays or matrices.
+#' Helper function for locate_ndl_in_hay().
+#' 
+#' @param ndl_mt,hay_mt  A matrix.
+#' @return A tibble.
+#' @examples
+#' val <- seq(from = 0, to = 1, by = 0.1)
+#' mt_1 <- matrix(sample(val,  20, replace = TRUE))
+#' mt_2 <- matrix(sample(val, 100, replace = TRUE))
+#' compare_table(mt_1, mt_2)
+#' 
+#' @export
+compare_table <- function(ndl_mt, hay_mt){
+  ndl <- 
+    tibble::tibble(val = as.numeric(ndl_mt)) %>%
+    dplyr::group_by(val) %>%
+    dplyr::summarise(ndl = dplyr:: n())
+  hay <- 
+    tibble::tibble(val = as.numeric(hay_mt)) %>%
+    dplyr::group_by(val) %>%
+    dplyr::summarise(hay = dplyr::n())
+  dplyr::left_join(ndl, hay) %>%
+    dplyr::arrange(hay, ndl)
+}
+
+#' Locate needle image  matrix position in a haystack_image matrix.
+#' 
+#' @param ndl_mt,hay_mt  A matrix
+#' @return A numeric pair of xy position of needle image.
+#' @examples
+#' library(imager)
+#' library(magrittr)
+#' sc <- 
+#'   screenshot() %>%
+#'   imager::load.image()
+#' w <- 100
+#' h <- 80
+#' pos_x <- 1
+#' pos_y <- height(sc) - h
+#' needle <- hay2needle(sc, pos_x, pos_y, w, h)
+#' hay_mt <- image2gray_matrix(sc)
+#' ndl_mt <- image2gray_matrix(needle)
+#' (pos <- locate_ndl_in_hay(ndl_mt, hay_mt))
+#' found <- hay2needle(sc, pos[1], pos[2], w, h)
+#' layout(c(1:3))
+#' plot(sc)
+#' plot(needle)
+#' plot(found)
+#' 
+#' @export
+locate_ndl_in_hay <- function(ndl_mt, hay_mt){
+  comp_table <- compare_table(ndl_mt, hay_mt)
+  val <- comp_table$val
+  nrow_ndl <- dim(ndl_mt)[1]
+  nrow_hay <- dim(hay_mt)[1]
+  # first position
+  pos_in_ndl <- 
+    which(ndl_mt == val[1]) %>%
+    purrr::map(index2xy, nrow_ndl)
+  pos_in_hay <- 
+    which(hay_mt == val[1]) %>%
+    purrr::map(index2xy, nrow_hay)
+  base_xy <- purrr::map(pos_in_hay, `-`, pos_in_ndl[[1]])
+  if(length(base_xy) == 1){
+    return(base_xy[[1]] + 1)
+  }
+  # second and latter
+  for(v in val){
+    pos_in_ndl <- 
+      which(ndl_mt == v) %>%
+      purrr::map(index2xy, dim(ndl_mt)[1])
+    pos_in_hay <- 
+      which(hay_mt == v) %>%
+      purrr::map(index2xy, dim(hay_mt)[1])
+    for(i in seq_along(pos_in_ndl)){
+      base_xy_next <- purrr::map(pos_in_hay, `-`, pos_in_ndl[[i]])
+      base_xy <- intersect(base_xy, base_xy_next)
+      if(length(base_xy) == 1){
+        return(base_xy[[1]] + 1)
       }
     }
   }
-  warning("Not found needle_image in haystack_image")
+  warning("needle Not found")
+  return(c(0, 0))
 }
