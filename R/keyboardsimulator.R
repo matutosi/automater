@@ -145,16 +145,42 @@ index2xy <- function(index, nrow){
 #' 
 #' @export
 compare_table <- function(ndl_mt, hay_mt){
-  ndl <- 
-    tibble::tibble(val = as.numeric(ndl_mt)) %>%
-    dplyr::group_by(val) %>%
-    dplyr::summarise(ndl = dplyr:: n())
-  hay <- 
-    tibble::tibble(val = as.numeric(hay_mt)) %>%
-    dplyr::group_by(val) %>%
-    dplyr::summarise(hay = dplyr::n())
+  ndl <- count_val_freq(ndl_mt, "ndl")
+  hay <- count_val_freq(hay_mt, "hay")
   dplyr::left_join(ndl, hay) %>%
     dplyr::arrange(hay, ndl)
+}
+
+#' Helper function for compare_table().
+#' 
+#' @param mt       A numeric matrix or array.
+#' @param colname  A string of name for count.
+#' @return     A 
+#' @examples
+#' mt <- sample(1:10, 30, replace = TRUE)
+#' count_val_freq(mt, "freq")
+#' 
+#' @export
+count_val_freq <- function(mt, colname){
+  tibble::tibble(val = as.numeric(mt)) %>%
+    dplyr::group_by(val) %>%
+    dplyr::summarise({{colname}} := dplyr::n())
+}
+
+#' Get xy position of a value in a matrix
+#' Helper function for locate_ndl_in_hay()
+#' 
+#' @param mt   A matrix
+#' @param val  A matrix
+#' @return     A list of xy pairs.
+#' @examples
+#' mt <- matrix(1:12, nrow = nrow)
+#' xy_pos(mt, 5)
+#' 
+#' @export
+xy_pos <- function(mt, val){
+  which(mt == val) %>%
+    purrr::map(index2xy, nrow(mt))
 }
 
 #' Locate needle image  matrix position in a haystack_image matrix.
@@ -185,27 +211,17 @@ compare_table <- function(ndl_mt, hay_mt){
 locate_ndl_in_hay <- function(ndl_mt, hay_mt){
   comp_table <- compare_table(ndl_mt, hay_mt)
   val <- comp_table$val
-  nrow_ndl <- dim(ndl_mt)[1]
-  nrow_hay <- dim(hay_mt)[1]
   # first position
-  pos_in_ndl <- 
-    which(ndl_mt == val[1]) %>%
-    purrr::map(index2xy, nrow_ndl)
-  pos_in_hay <- 
-    which(hay_mt == val[1]) %>%
-    purrr::map(index2xy, nrow_hay)
+  pos_in_ndl <- xy_pos(ndl_mt, val[1])
+  pos_in_hay <- xy_pos(hay_mt, val[1])
   base_xy <- purrr::map(pos_in_hay, `-`, pos_in_ndl[[1]])
   if(length(base_xy) == 1){
     return(base_xy[[1]] + 1)
   }
   # second and latter
   for(v in val){
-    pos_in_ndl <- 
-      which(ndl_mt == v) %>%
-      purrr::map(index2xy, dim(ndl_mt)[1])
-    pos_in_hay <- 
-      which(hay_mt == v) %>%
-      purrr::map(index2xy, dim(hay_mt)[1])
+    pos_in_ndl <- xy_pos(ndl_mt, v)
+    pos_in_hay <- xy_pos(hay_mt, v)
     for(i in seq_along(pos_in_ndl)){
       base_xy_next <- purrr::map(pos_in_hay, `-`, pos_in_ndl[[i]])
       base_xy <- intersect(base_xy, base_xy_next)
@@ -214,6 +230,6 @@ locate_ndl_in_hay <- function(ndl_mt, hay_mt){
       }
     }
   }
-  warning("needle Not found")
+  warning("Needle_image Not found in haystack_image")
   return(c(0, 0))
 }
