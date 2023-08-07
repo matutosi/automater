@@ -41,7 +41,29 @@ mouse_record <- function(n = 5, interval = 1){
   return(list(x = unlist(x), y = unlist(y)))
 }
 
+#' Take a screenshot. 
+#' 
+#' "screenCapture.bat"  https://github.com/npocmaka/batch.scripts/blob/master/hybrids/.net/c/screenCapture.bat
+#' @param file  A string for file name of screenshot.
+#' @return      A file name of screenshot. When "", screenshot will be saved in a tempral directory.
+#' @examples
+#' sc <- screenshot()
+#' imager::load.image(sc)
+#' 
+#' @export
+screenshot <- function(file = ""){
+  if(file == ""){
+    file <- fs::file_temp("sc_", ext = "png")
+  }
+  pkg <- fs::path_package("automater")
+  exe <- fs::path(pkg, "keyboardsimulator/screenCapture.exe ")
+  cmd <- paste0(exe, file)
+  system(cmd, intern = TRUE)
+  return(file)
+}
 
+
+## WIP
 #' Combert Cimg class into grayscale x-y matrix.
 #' Use grayscale to Speed up and to simplify code.
 #' 
@@ -97,7 +119,6 @@ locate_image <- function(needle_image, haystack_image, center = TRUE){
   }
 }
 
-## WIP
   # img2matrix <- function(img){
   #   df <- as.data.frame(img)
   #   mt <- tapply(df$value, list(df$x, df$y, df$cc), c)
