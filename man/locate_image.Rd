@@ -13,19 +13,19 @@ locate_image_cpp(ndl_mt, hay_mt)
 
 image2gray_matrix(img)
 
-locate_image(needle_image, haystack_image, center = TRUE)
+locate_image(needle_image, center = TRUE)
 }
 \arguments{
 \item{mt_1, mt_2}{A matrix of image data.}
 
 \item{ndl_mt, hay_mt}{A matrix with grayscale x-y position.}
 
-\item{img}{A Cimg.}
+\item{img}{A cimg object.}
 
-\item{needle_image, haystack_image}{A image.}
+\item{needle_image}{A string of image file path or
+a "cimg" class object of imager library.}
 
-\item{center}{A logical.
-TRUE returns center position of needle_image.}
+\item{center}{A logical. TRUE returns center position of needle_image.}
 }
 \value{
 A logical.
@@ -35,30 +35,33 @@ x-y position of needle image.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{ A two (x-y) dimensional matrix.
 }\if{html}{\out{</div>}}
 
-A vector (x-y) integer of location for ndl_img.
+An integer vector (x-y) of image location.
 }
 \description{
 Search needle image in haystack image and locate needle position.
 
-Combert Cimg class into grayscale x-y matrix.
+Comvert cimg class into grayscale x-y matrix.
 Use grayscale to Speed up and to simplify code.
+
+Locate needle image position.
 }
 \examples{
-library(magrittr)
 library(imager)
-haystack_image <- imager::load.example("parrots")
-pos_x <- 200; pos_y <- 200
-size_x <- 50; size_y <- 20
-needle_image <- 
-  haystack_image[
-    pos_x:(pos_x + size_x), 
-    pos_y:(pos_y + size_y),] \%>\%
-  as.cimg()
+\dontrun{
+sc <- imager::load.image(screenshot())
+w <- 100
+h <- 80
+pos_x <- 0
+pos_y <- imager::height(sc) - h
+needle <- hay2needle(sc, pos_x, pos_y, w, h)
+(locate_image(needle))
+pos <- locate_image(needle, center = FALSE)
 
-layout(t(1:2))
-plot(needle_image)
-plot(haystack_image)
-
-locate_image(needle_image, haystack_image)
+found <- hay2needle(sc, pos[1], pos[2], w, h)
+layout(c(1:3))
+plot(sc)
+plot(needle)
+plot(found)
+}
 
 }
