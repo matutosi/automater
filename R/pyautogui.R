@@ -16,7 +16,7 @@
 #' reticulate::use_python(python_path)
 #' pag <- reticulate::import("pyautogui")
 #' img <- fs::path_package("automater", "img", "up_arrow.png")
-#' recog_image_click(igm, pag)
+#' recog_image_click(img, pag)
 #' 
 #' @export
 recog_image_click <- function(img, pag, wait = TRUE, 
@@ -89,11 +89,11 @@ display_size <- function(){
 #' python_path <- find_python()
 #' reticulate::use_python(python_path)
 #' pag <- reticulate::import("pyautogui")
-#' screenshot("ss.png", pag = pag)
-#' screenshot("ss.png", region = c(100, 100, 100, 100), pag = pag)
+#' screenshot_pag("ss.png", pag = pag)
+#' screenshot_pag("ss.png", region = c(100, 100, 100, 100), pag = pag)
 #' 
 #' @export
-screenshot <- function(path, region = NULL, pag = NULL){
+screenshot_pag <- function(path, region = NULL, pag = NULL){
   if(is.null(pag)){
     pag <- reticulate::import("pyautogui")
   }

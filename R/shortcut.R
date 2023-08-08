@@ -56,7 +56,7 @@ make_shortcut <- function(exe, shortcut = NULL, dir = NULL,
   input <- paste0(wsh, create, target, icon, size, arg, wd, finish)
   cmd <- "powershell"
   res <- shell(cmd, input = input, intern = TRUE)
-  shortcut <- stringr::str_remove_all_all(shortcut, "\"")
+  shortcut <- stringr::str_remove_all(shortcut, "\"")
   return(list(shortcut = shortcut, res = res))
 }
 
