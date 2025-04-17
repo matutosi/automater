@@ -35,6 +35,6 @@ python_path <- find_python()
 reticulate::use_python(python_path)
 pag <- reticulate::import("pyautogui")
 img <- fs::path_package("automater", "img", "up_arrow.png")
-recog_image_click(igm, pag)
+recog_image_click(img, pag)
 
 }

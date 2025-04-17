@@ -15,8 +15,10 @@ path_convert <- function(path, sub_dir = NULL, pre = NULL, post = NULL, ext = NU
   dir <- fs::path_dir(path)
   file <- fs::path_file(path)
   if(!is.null(ext)) { file <- fs::path_ext_set(file, ext) }
-  file <- paste0(pre, fs::path_ext_remove(file), post, ".", fs::path_ext(file))
-  if(is.null(sub_dir)) { 
+  file <- fs::path_ext_remove(file)
+  ext <- fs::path_ext(file)
+  file <- paste0(pre, file, post, ".", ext)
+  if(is.null(sub_dir)){ 
     return(fs::path(dir, file))
   }else{
     return(fs::path(dir, sub_dir, file))

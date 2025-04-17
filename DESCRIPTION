@@ -7,7 +7,7 @@ Description: To automate manipulations use R packages xlsx, qpdf, tesseract, Mic
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Depends: 
     R (>= 3.5.0)
 URL: https://github.com/matutosi/automater
@@ -45,6 +45,7 @@ Suggests:
     purrr,
     rlang,
     rmarkdown,
+    rstudioapi,
     spelling,
     stringr,
     testthat (>= 3.0.0),

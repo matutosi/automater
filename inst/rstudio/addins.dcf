@@ -1,0 +1,14 @@
+Name: Test
+Description: Test
+Binding: test_addin
+Interactive: false
+
+Name: Next Section
+Description: Move Cursor to Next Section.
+Binding: next_section
+Interactive: false
+
+Name: Previous Section
+Description: Move Cursor to Previous Section.
+Binding: prev_section
+Interactive: false

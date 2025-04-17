@@ -26,7 +26,7 @@ Get screenshot.
 python_path <- find_python()
 reticulate::use_python(python_path)
 pag <- reticulate::import("pyautogui")
-screenshot("ss.png", pag = pag)
-screenshot("ss.png", region = c(100, 100, 100, 100), pag = pag)
+screenshot_pag("ss.png", pag = pag)
+screenshot_pag("ss.png", region = c(100, 100, 100, 100), pag = pag)
 
 }
